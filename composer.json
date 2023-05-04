@@ -11,9 +11,11 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "morphp/medas-storage-manager": "dev-dev"
+        "morphp/medas-storage-manager": "dev-dev",
+        "morphp/medas-object-to-array-serializer": "dev-dev"
     },
     "require-dev": {
+        "morphp/medas-config-manager": "dev-dev",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {

@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Medas\JsonStorage;
 
 use Medas\Core\AsSingleton;
+use Medas\ObjectToArraySerializer\ObjectToArraySerializerPackage;
 use Medas\ServiceManager\BasePackage;
+use Medas\StorageManager\StorageManagerPackage;
 
 class JsonStoragePackage extends BasePackage
 {
@@ -14,6 +16,8 @@ class JsonStoragePackage extends BasePackage
     public function dependencies(): array
     {
         return $this->dependenciesByClass([
+            StorageManagerPackage::class,
+            ObjectToArraySerializerPackage::class,
         ]);
     }
 
