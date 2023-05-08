@@ -7,6 +7,7 @@ namespace Medas\JsonStorage;
 use Medas\Core\Attributes\Service;
 use Medas\Core\Interfaces\{Guid, GuidProvider, Serializer, Type};
 use Medas\EntityManager\Types\Guid as GuidType;
+use Medas\ServiceManager\Exceptions\GuidProviderIsNotAvailable;
 
 #[Service]
 class JsonSerializer implements Serializer
@@ -23,8 +24,10 @@ class JsonSerializer implements Serializer
             $value = $value->toBytes();
         }
 
-        if (is_string($value) && !mb_check_encoding($value, 'UTF-8')) {
-            $value = 'base64:' . base64_encode($value);
+        if (is_string($value)) {
+            if (!mb_check_encoding($value, 'UTF-8') || str_starts_with($value, 'base64:')) {
+                $value = 'base64:' . base64_encode($value);
+            }
         }
 
         return $value;
@@ -37,6 +40,10 @@ class JsonSerializer implements Serializer
         }
 
         if ($type instanceof GuidType) {
+            if ($this->guidProvider === null) {
+                throw new GuidProviderIsNotAvailable();
+            }
+
             $value = $this->guidProvider->fromBytes($value);
         }
 
