@@ -108,11 +108,11 @@ class JsonFile implements Store
             Definition::class
         );
 
-        $this->records = array_map(
-            fn(mixed $id, array $data) => new JsonRecord($data, $id),
-            array_keys($data['records']),
-            array_values($data['records']),
-        );
+        $this->records = [];
+
+        foreach ($data['records'] as $id => $values) {
+            $this->records[$id] = new JsonRecord($values, $id);
+        }
     }
 
     public function prepareCreate(array $values): Action
