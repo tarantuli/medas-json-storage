@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage;
 
+use Medas\Core\Attributes\ConfigValue;
 use Medas\Core\Interfaces\DirectoryManager;
+use Medas\JsonStorage\ConfigOptions\DirectoryPath;
 use Medas\StorageManager\Interfaces\{Storage, StorageController, Store};
 
 class JsonDirectory implements Storage
@@ -15,7 +17,7 @@ class JsonDirectory implements Storage
     private JsonStorageController $controller;
 
     public function __construct(
-        public readonly string $directory,
+        #[ConfigValue(DirectoryPath::class)] public readonly string $directory,
     )
     {
         service(DirectoryManager::class)->create($this->directory);
