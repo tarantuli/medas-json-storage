@@ -11,15 +11,17 @@ use Medas\StorageManager\Migrations\MigrationBuilder;
 class JsonStorageController implements StorageController
 {
     private JsonSerializer $serializer;
+    private JsonTransaction $transaction;
 
     public function __construct()
     {
         $this->serializer = service(JsonSerializer::class);
+        $this->transaction = new JsonTransaction();
     }
 
     public function transaction(): Transaction
     {
-        // TODO: Implement transaction() method.
+        return $this->transaction;
     }
 
     public function deleteStore(string $name): void
