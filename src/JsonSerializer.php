@@ -32,7 +32,7 @@ class JsonSerializer implements Serializer
 
     public function unserialize(mixed $value, Type $type = null): mixed
     {
-        if (str_starts_with($value, 'base64:')) {
+        if (is_string($value) && str_starts_with($value, 'base64:')) {
             $value = base64_decode(substr($value, 7), true);
         }
 

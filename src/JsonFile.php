@@ -111,6 +111,7 @@ class JsonFile implements Store
         $this->records = [];
 
         foreach ($data['records'] as $id => $values) {
+            $values[$this->definition->idName] = $id;
             $this->records[$id] = new JsonRecord($values, $id);
         }
     }
