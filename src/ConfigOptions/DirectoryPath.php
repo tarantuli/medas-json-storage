@@ -13,7 +13,7 @@ class DirectoryPath implements ConfigOption
 
     public function group(): ConfigGroup
     {
-        return JsonStorageGroup::instance();
+        return JsonGroup::instance();
     }
 
     public function name(): string

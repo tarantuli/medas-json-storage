@@ -6,18 +6,19 @@ namespace Medas\JsonStorage\ConfigOptions;
 
 use Medas\Core\AsSingleton;
 use Medas\Core\Interfaces\ConfigGroup;
+use Medas\StorageManager\ConfigOptions\RootGroup;
 
-class JsonStorageGroup implements ConfigGroup
+class JsonGroup implements ConfigGroup
 {
     use AsSingleton;
 
     public function parent(): ConfigGroup|null
     {
-        return null;
+        return RootGroup::instance();
     }
 
     public function name(): string
     {
-        return 'json-storage';
+        return 'json';
     }
 }
