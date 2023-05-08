@@ -10,8 +10,11 @@ use Medas\StorageManager\Migrations\MigrationBuilder;
 
 class JsonStorageController implements StorageController
 {
+    private JsonSerializer $serializer;
+
     public function __construct()
     {
+        $this->serializer = service(JsonSerializer::class);
     }
 
     public function transaction(): Transaction
@@ -31,7 +34,7 @@ class JsonStorageController implements StorageController
 
     public function serializer(): Serializer
     {
-        // TODO: Implement serializer() method.
+        return $this->serializer;
     }
 
     public function actionBuilder(): ActionBuilder
