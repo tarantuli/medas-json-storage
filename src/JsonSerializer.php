@@ -12,6 +12,8 @@ use Medas\ServiceManager\Exceptions\GuidProviderIsNotAvailable;
 #[Service]
 class JsonSerializer implements Serializer
 {
+    private const ENCODING_PREFIX = 'base64:';
+
     public function __construct(
         private readonly GuidProvider|null $guidProvider,
     )
@@ -25,8 +27,8 @@ class JsonSerializer implements Serializer
         }
 
         if (is_string($value)) {
-            if (!mb_check_encoding($value, 'UTF-8') || str_starts_with($value, 'base64:')) {
-                $value = 'base64:' . base64_encode($value);
+            if (!mb_check_encoding($value, 'UTF-8') || str_starts_with($value, self::ENCODING_PREFIX)) {
+                $value = self::ENCODING_PREFIX . base64_encode($value);
             }
         }
 
@@ -35,7 +37,7 @@ class JsonSerializer implements Serializer
 
     public function unserialize(mixed $value, Type $type = null): mixed
     {
-        if (is_string($value) && str_starts_with($value, 'base64:')) {
+        if (is_string($value) && str_starts_with($value, self::ENCODING_PREFIX)) {
             $value = base64_decode(substr($value, 7), true);
         }
 
