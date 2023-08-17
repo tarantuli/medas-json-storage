@@ -15,10 +15,10 @@ class JsonStoragePackage extends BasePackage
 
     public function dependencies(): array
     {
-        return $this->dependenciesByClass([
-            StorageManagerPackage::class,
-            ObjectToArraySerializerPackage::class,
-        ]);
+        return [
+            StorageManagerPackage::instance(),
+            ObjectToArraySerializerPackage::instance(),
+        ];
     }
 
     public function sourceDirectory(): string
