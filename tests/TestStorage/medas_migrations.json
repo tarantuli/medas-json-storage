@@ -1,0 +1,9 @@
+{
+    "key": null,
+    "data": [
+        {
+            "migration": "Medas\\Migrations\\Migration20230905150012735050",
+            "migrated_at": "2023-09-05 17:00:12"
+        }
+    ]
+}

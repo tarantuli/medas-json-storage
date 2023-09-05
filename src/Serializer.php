@@ -6,16 +6,16 @@ namespace Medas\JsonStorage;
 
 use Medas\Core\Attributes\Service;
 use Medas\Core\Exceptions\GuidProviderIsNotAvailable;
-use Medas\Core\Interfaces\{Guid, GuidProvider, Serializer, Type};
+use Medas\Core\Interfaces\{Guid, GuidProvider, Serializer as SerializerInterface, Type};
 use Medas\EntityManager\Types\Guid as GuidType;
 
 #[Service]
-class JsonSerializer implements Serializer
+readonly class Serializer implements SerializerInterface
 {
     private const ENCODING_PREFIX = 'base64:';
 
     public function __construct(
-        private readonly GuidProvider|null $guidProvider,
+        private GuidProvider|null $guidProvider,
     )
     {
     }

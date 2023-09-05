@@ -19,6 +19,7 @@
     "require-dev": {
         "morphp/medas-config-manager": "dev-dev",
         "morphp/medas-service-manager": "dev-dev",
+        "morphp/medas-storage-manager-tests": "dev-dev",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
