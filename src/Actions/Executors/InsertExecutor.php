@@ -6,8 +6,8 @@ namespace Medas\JsonStorage\Actions\Executors;
 
 use Medas\Core\Attributes\Service;
 use Medas\JsonStorage\Actions\RecordAction;
-use Medas\JsonStorage\IO\FileReader;
-use Medas\JsonStorage\IO\FileWriter;
+use Medas\JsonStorage\IO\{FileReader, FileWriter};
+use Medas\StorageManager\Entities\LastInsertIdPlaceholder;
 
 #[Service]
 readonly class InsertExecutor
@@ -22,7 +22,24 @@ readonly class InsertExecutor
     public function execute(RecordAction $action): void
     {
         $content = $this->reader->read($action->file);
-        $content['data'][] = $action->data;
+
+        $keyProperty = $content['key'];
+
+        if ($keyProperty === null || !isset($action->data[$keyProperty])) {
+            $key = count($content['data']) + 1;
+        }
+        else {
+            if ($action->data[$keyProperty] instanceof LastInsertIdPlaceholder) {
+                $key = count($content['data']) + 1;
+                $action->data[$keyProperty] = $key;
+            }
+            else {
+                $key = $action->data[$keyProperty];
+            }
+        }
+
+        $action->insertId = $key;
+        $content['data'][$key] = $action->data;
         $this->writer->write($action->file, $content);
     }
 }

@@ -18,20 +18,28 @@ readonly class Executor implements ActionExecutor
     {
     }
 
-    public function execute(Action $action): void
+    public function execute(Action $action, ActionSet $actionSet = null): void
     {
         match (true) {
             $action instanceof CreateFileAction => $this->createFileExecutor->execute($action),
             $action instanceof RecordAction && $action->type === Type::InsertRecord => $this->insertExecutor->execute($action),
             default => throw new \Exception('To be implemented'),
         };
+
+        if ($action instanceof RecordAction && $action->insertId && $actionSet) {
+            $actionSet->lastInsertId = $action->insertId;
+        }
+
+        if ($onComplete = $action->onComplete()) {
+            $insertId = $actionSet ? $actionSet->lastInsertId : ($action instanceof RecordAction ? $action->insertId : null);
+            $onComplete($action->storage(), $insertId);
+        }
     }
 
     public function executeSet(ActionSet $actionSet): void
     {
-        /** @var \Medas\JsonStorage\Actions\ActionSet $actionSet */
         foreach ($actionSet as $action) {
-            $this->execute($action);
+            $this->execute($action, $actionSet);
         }
     }
 }

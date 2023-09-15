@@ -10,11 +10,13 @@ use Medas\StorageManager\UnitOfWork\{BaseAction, Priority};
 
 class RecordAction extends BaseAction
 {
+    public mixed $insertId;
+
     public RecordSet $recordSet;
 
     public function __construct(
         public readonly Type        $type,
-        public readonly mixed       $data,
+        public mixed                $data,
         public readonly StorageFile $file,
         Priority                    $priority = Priority::Default
     )

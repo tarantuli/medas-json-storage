@@ -56,7 +56,13 @@ class StorageController implements StorageControllerInterface
 
     public function deleteStore(Store $store): void
     {
-        // TODO: Implement deleteStore() method.
+        $storage ??= $this->defaultStorage;
+
+        $path = $this->pathBuilder->build($storage, $store->name());
+
+        if (file_exists($path)) {
+            unlink($path);
+        }
     }
 
     public function transaction(Storage $storage = null): TransactionInterface
@@ -72,7 +78,7 @@ class StorageController implements StorageControllerInterface
 
     public function lastGeneratedValue(Storage $storage = null): int|null
     {
-        $storage ??= $this->defaultStorage;
+        // $storage ??= $this->defaultStorage;
         // TODO: Implement lastGeneratedValue() method.
     }
 

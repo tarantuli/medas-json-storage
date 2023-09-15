@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage\Builders;
 
+use Medas\Core\Attributes\ConfigValue;
 use Medas\Core\Attributes\Service;
 use Medas\JsonStorage\Actions\CreateFileAction;
 use Medas\JsonStorage\IO\PathBuilder;
 use Medas\JsonStorage\Json;
 use Medas\JsonStorage\StorageDirectory;
+use Medas\StorageManager\ConfigOptions\OriginalClassStorage\DefaultStrategy;
+use Medas\StorageManager\Inheritance\OriginalClassStorageStrategy;
 use Medas\StorageManager\Interfaces\Builders\CreateStoreBuilder as CreateStoreBuilderInterface;
 use Medas\StorageManager\Interfaces\Storage;
 use Medas\StorageManager\Structure\Blueprint;
@@ -20,6 +23,9 @@ readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
     public function __construct(
         private Json        $json,
         private PathBuilder $pathBuilder,
+
+        #[ConfigValue(DefaultStrategy::class)]
+        private OriginalClassStorageStrategy $originalClassStorageStrategy,
     )
     {
     }
@@ -27,20 +33,45 @@ readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
     public function build(Storage $storage, Blueprint $blueprint): ActionSet
     {
         /** @var StorageDirectory $storage */
-        $path = $this->pathBuilder->build($storage, $blueprint->name());
+        $job = new CreateStoreBuilder\Job($storage, $blueprint);
 
-        return \Medas\JsonStorage\Actions\ActionSet::fromAction(new CreateFileAction(
-            $storage->name(),
-            $path,
-            $this->json->encode($this->createContent($blueprint))
-        ));
+        $this->addBasicStore($job);
+        $this->handleOriginalEntityType($job);
+
+        return $job->actionSet;
     }
 
-    public function createContent(Blueprint $blueprint): array
+    private function createContent(Blueprint $blueprint): array
     {
         return [
             'key' => $blueprint->primaryIndex()?->fields()[0]?->name,
             'data' => [],
         ];
+    }
+
+    private function addBasicStore(CreateStoreBuilder\Job $job): void
+    {
+        $path = $this->pathBuilder->build($job->directory, $job->blueprint->name);
+
+        $job->actionSet[] = new CreateFileAction(
+            $job->directory->name(),
+            $path,
+            $this->json->encode($this->createContent($job->blueprint))
+        );
+    }
+
+    private function handleOriginalEntityType(CreateStoreBuilder\Job $job): void
+    {
+        if (!$job->blueprint->storeOriginalClass) {
+            return;
+        }
+
+        if ($job->blueprint->storeRequestingOriginalClassStorage !== $job->blueprint->name) {
+            return;
+        }
+
+        foreach ($this->originalClassStorageStrategy->buildStoreActions($job->blueprint, $job->directory) as $query) {
+            $job->actionSet[] = $query;
+        }
     }
 }

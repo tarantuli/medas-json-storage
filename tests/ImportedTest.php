@@ -7,11 +7,13 @@ namespace Medas\JsonStorageTest;
 use Medas\StorageManager\Interfaces\{Storage, StorageController, Store};
 use Medas\StorageManager\StorageManager;
 use Medas\StorageManagerTests\Functional\EntityPersisterTest;
+use Medas\StorageManagerTests\Functional\InheritanceTest;
 use PHPUnit\Framework\TestCase;
 
 class ImportedTest extends TestCase
 {
-    use EntityPersisterTest;
+    use InheritanceTest;
+    // use EntityPersisterTest;
 
     private Storage $storage;
     private StorageController $controller;
