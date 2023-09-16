@@ -6,7 +6,7 @@ namespace Medas\JsonStorage\Builders;
 
 use Medas\Core\Attributes\ConfigValue;
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\Actions\CreateFileAction;
+use Medas\JsonStorage\Actions\CreateFile;
 use Medas\JsonStorage\IO\PathBuilder;
 use Medas\JsonStorage\Json;
 use Medas\JsonStorage\StorageDirectory;
@@ -53,7 +53,7 @@ readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
     {
         $path = $this->pathBuilder->build($job->directory, $job->blueprint->name);
 
-        $job->actionSet[] = new CreateFileAction(
+        $job->actionSet[] = new CreateFile(
             $job->directory->name(),
             $path,
             $this->json->encode($this->createContent($job->blueprint))

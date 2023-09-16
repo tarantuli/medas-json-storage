@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Actions\Executors;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\Actions\RecordAction;
+use Medas\JsonStorage\Actions\InsertRecord;
 use Medas\JsonStorage\IO\{FileReader, FileWriter};
 use Medas\StorageManager\Entities\LastInsertIdPlaceholder;
 
 #[Service]
-readonly class InsertExecutor
+readonly class InsertRecordExecutor
 {
     public function __construct(
         private FileReader $reader,
@@ -19,7 +19,7 @@ readonly class InsertExecutor
     {
     }
 
-    public function execute(RecordAction $action): void
+    public function execute(InsertRecord $action): void
     {
         $content = $this->reader->read($action->file);
 

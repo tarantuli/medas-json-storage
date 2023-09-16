@@ -8,21 +8,28 @@ use Medas\JsonStorage\StorageFile;
 use Medas\StorageManager\Interfaces\RecordSet;
 use Medas\StorageManager\UnitOfWork\{BaseAction, Priority};
 
-class RecordAction extends BaseAction
+class InsertRecord extends BaseAction
 {
     public mixed $insertId;
 
     public RecordSet $recordSet;
 
     public function __construct(
-        public readonly Type        $type,
         public mixed                $data,
         public readonly StorageFile $file,
         Priority                    $priority = Priority::Default
     )
     {
-        $this->storage = $this->file->storage();
-        $this->priority = $priority;
+        parent::__construct($this->file->storage(), $priority);
+    }
+
+    public function __serialize(): array
+    {
+        return [
+            'file' => $this->file,
+            'data' => $this->data,
+            'priority' => $this->priority,
+        ];
     }
 
     public function recordSet(): RecordSet

@@ -12,8 +12,9 @@ use Medas\StorageManager\UnitOfWork\{Action, ActionSet};
 readonly class Executor implements ActionExecutor
 {
     public function __construct(
-        private Executors\InsertExecutor     $insertExecutor,
-        private Executors\CreateFileExecutor $createFileExecutor,
+        private Executors\CreateFileExecutor   $createFileExecutor,
+        private Executors\GetRecordExecutor    $getRecordExecutor,
+        private Executors\InsertRecordExecutor $insertRecordExecutor,
     )
     {
     }
@@ -21,17 +22,18 @@ readonly class Executor implements ActionExecutor
     public function execute(Action $action, ActionSet $actionSet = null): void
     {
         match (true) {
-            $action instanceof CreateFileAction => $this->createFileExecutor->execute($action),
-            $action instanceof RecordAction && $action->type === Type::InsertRecord => $this->insertExecutor->execute($action),
-            default => throw new \Exception('To be implemented'),
+            $action instanceof CreateFile => $this->createFileExecutor->execute($action),
+            $action instanceof InsertRecord => $this->insertRecordExecutor->execute($action),
+            $action instanceof GetRecord => $this->getRecordExecutor->execute($action),
+            default => throw new \Exception('To be implemented: ' . $action::class),
         };
 
-        if ($action instanceof RecordAction && $action->insertId && $actionSet) {
+        if ($action instanceof InsertRecord && $action->insertId && $actionSet) {
             $actionSet->lastInsertId = $action->insertId;
         }
 
         if ($onComplete = $action->onComplete()) {
-            $insertId = $actionSet ? $actionSet->lastInsertId : ($action instanceof RecordAction ? $action->insertId : null);
+            $insertId = $actionSet ? $actionSet->lastInsertId : ($action instanceof InsertRecord ? $action->insertId : null);
             $onComplete($action->storage(), $insertId);
         }
     }

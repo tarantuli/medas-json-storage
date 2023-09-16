@@ -33,7 +33,7 @@ readonly class ActionBuilders implements ActionBuildersInterface
 
     public function get(): Builders\GetBuilder
     {
-        // TODO: Implement get() method.
+        return service(GetBuilder::class);
     }
 
     public function update(): Builders\UpdateBuilder
