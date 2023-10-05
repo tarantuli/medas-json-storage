@@ -23,13 +23,13 @@ readonly class Executor implements ActionExecutor
     {
         match (true) {
             $action instanceof CreateFile => $this->createFileExecutor->execute($action),
-            $action instanceof InsertRecord => $this->insertRecordExecutor->execute($action),
+            $action instanceof InsertRecord => $this->insertRecordExecutor->execute($action, $actionSet?->lastInsertId),
             $action instanceof GetRecord => $this->getRecordExecutor->execute($action),
             default => throw new \Exception('To be implemented: ' . $action::class),
         };
 
-        if ($action instanceof InsertRecord && $action->insertId && $actionSet) {
-            $actionSet->lastInsertId = $action->insertId;
+        if ($actionSet) {
+            $this->updateActionSet($action, $actionSet);
         }
 
         if ($onComplete = $action->onComplete()) {
@@ -42,6 +42,17 @@ readonly class Executor implements ActionExecutor
     {
         foreach ($actionSet as $action) {
             $this->execute($action, $actionSet);
+        }
+    }
+
+    private function updateActionSet(Action $action, ActionSet $actionSet): void
+    {
+        if ($action instanceof InsertRecord && $action->insertId) {
+            $actionSet->lastInsertId = $action->insertId;
+        }
+
+        if ($action instanceof GetRecord) {
+            $actionSet->lastRecordSet = $action->recordSet;
         }
     }
 }

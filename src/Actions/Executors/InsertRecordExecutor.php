@@ -6,40 +6,36 @@ namespace Medas\JsonStorage\Actions\Executors;
 
 use Medas\Core\Attributes\Service;
 use Medas\JsonStorage\Actions\InsertRecord;
-use Medas\JsonStorage\IO\{FileReader, FileWriter};
+use Medas\JsonStorage\Data\DataManager;
 use Medas\StorageManager\Entities\LastInsertIdPlaceholder;
 
 #[Service]
 readonly class InsertRecordExecutor
 {
     public function __construct(
-        private FileReader $reader,
-        private FileWriter $writer,
+        private DataManager $dataManager,
     )
     {
     }
 
-    public function execute(InsertRecord $action): void
+    public function execute(InsertRecord $action, int|null $lastInsertId): void
     {
-        $content = $this->reader->read($action->file);
+        $content = $this->dataManager->get($action->file);
 
-        $keyProperty = $content['key'];
-
-        if ($keyProperty === null || !isset($action->data[$keyProperty])) {
-            $key = count($content['data']) + 1;
+        if ($content->keyName === null || !isset($action->data[$content->keyName])) {
+            $key = $content->dataCount() + 1;
         }
         else {
-            if ($action->data[$keyProperty] instanceof LastInsertIdPlaceholder) {
-                $key = count($content['data']) + 1;
-                $action->data[$keyProperty] = $key;
+            if ($action->data[$content->keyName] instanceof LastInsertIdPlaceholder) {
+                $key = $lastInsertId;
+                $action->data[$content->keyName] = $key;
             }
             else {
-                $key = $action->data[$keyProperty];
+                $key = $action->data[$content->keyName];
             }
         }
 
         $action->insertId = $key;
-        $content['data'][$key] = $action->data;
-        $this->writer->write($action->file, $content);
+        $content->setDatum($key, $action->data);
     }
 }

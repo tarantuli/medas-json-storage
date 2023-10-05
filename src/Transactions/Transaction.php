@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage\Transactions;
 
+use Medas\JsonStorage\Data\DataManager;
 use Medas\StorageManager\Interfaces\Transaction as TransactionInterface;
 
 class Transaction implements TransactionInterface
 {
     public function begin(): void
     {
-        // Do nothing for now
+        service(DataManager::class)->flush();
     }
 
     public function rollback(): void
     {
-        // Do nothing for now
+        service(DataManager::class)->rollback();
     }
 
     public function commit(): void
     {
-        // Do nothing for now
+        service(DataManager::class)->flush();
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage\IO;
 
+use JetBrains\PhpStorm\ArrayShape;
 use Medas\Core\Attributes\Service;
 use Medas\JsonStorage\Exceptions\FileNotFound;
 use Medas\JsonStorage\Json;
@@ -19,6 +20,7 @@ readonly class FileReader
     {
     }
 
+    #[ArrayShape(['keyName' => 'string', 'data' => 'array'])]
     public function read(StorageFile $file): iterable
     {
         $path = $this->pathBuilder->build($file->storage(), $file->name());

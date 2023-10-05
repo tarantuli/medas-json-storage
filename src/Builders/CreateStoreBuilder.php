@@ -21,8 +21,8 @@ use Medas\StorageManager\UnitOfWork\ActionSet;
 readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
 {
     public function __construct(
-        private Json        $json,
-        private PathBuilder $pathBuilder,
+        private Json                         $json,
+        private PathBuilder                  $pathBuilder,
 
         #[ConfigValue(DefaultStrategy::class)]
         private OriginalClassStorageStrategy $originalClassStorageStrategy,
@@ -44,7 +44,7 @@ readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
     private function createContent(Blueprint $blueprint): array
     {
         return [
-            'key' => $blueprint->primaryIndex()?->fields()[0]?->name,
+            'keyName' => $blueprint->primaryIndex()?->fields()[0]?->name,
             'data' => [],
         ];
     }

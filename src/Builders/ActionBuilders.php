@@ -23,7 +23,7 @@ readonly class ActionBuilders implements ActionBuildersInterface
 
     public function selectorAction(): Builders\SelectorActionBuilder
     {
-        // TODO: Implement selectorAction() method.
+        return service(SelectorActionBuilder::class);
     }
 
     public function insert(): Builders\InsertBuilder

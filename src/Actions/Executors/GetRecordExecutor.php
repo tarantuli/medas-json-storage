@@ -6,13 +6,19 @@ namespace Medas\JsonStorage\Actions\Executors;
 
 use Medas\Core\Attributes\Service;
 use Medas\JsonStorage\Actions\GetRecord;
+use Medas\JsonStorage\Fetchers\FilteredFetcher;
 
 #[Service]
 readonly class GetRecordExecutor
 {
+    public function __construct(
+        private FilteredFetcher $filteredFetcher,
+    )
+    {
+    }
 
     public function execute(GetRecord $action): void
     {
-        diedump($action);
+        $action->recordSet = $this->filteredFetcher->fetch($action->files[0], $action->criteria);
     }
 }

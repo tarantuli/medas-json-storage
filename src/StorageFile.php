@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage;
 
-use Medas\StorageManager\Interfaces\Storage;
-use Medas\StorageManager\Interfaces\Store;
+use Medas\StorageManager\Interfaces\{Storage, Store};
 
 readonly class StorageFile implements Store
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Fetchers;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\IO\FileReader;
+use Medas\JsonStorage\Data\DataManager;
 use Medas\JsonStorage\RecordSet;
 use Medas\StorageManager\Entities\Record;
 use Medas\StorageManager\Interfaces\Fetchers\FilteredFetcher as FilteredFetcherInterface;
@@ -17,21 +17,28 @@ use Medas\StorageManager\Interfaces\Store;
 readonly class FilteredFetcher implements FilteredFetcherInterface
 {
     public function __construct(
-        private FileReader $reader,
+        private DataManager $dataManager,
     )
     {
     }
 
     public function fetch(Store $store, array $filters = []): RecordSetInterface
     {
-        $content = $this->reader->read($store);
-
+        $fileData = $this->dataManager->get($store);
         $set = new RecordSet();
 
-        foreach ($content['data'] as $record) {
+        if ($filters && $fileData->keyName === array_keys($filters)[0]) {
+            if ($record = $fileData->getDatum($filters[$fileData->keyName])) {
+                $set[] = new Record($record);
+            }
+
+            return $set;
+        }
+
+        foreach ($fileData->data() as $record) {
             $matches = true;
-            foreach ($filters as $key => $filter) {
-                if ($record[$key] !== $filter) {
+            foreach ($filters as $property => $filter) {
+                if ($record[$property] !== $filter) {
                     $matches = false;
                     break;
                 }
