@@ -6,8 +6,12 @@ namespace Medas\JsonStorage\Builders;
 
 use Medas\Core\Attributes\Service;
 use Medas\EntityManager\MetaDataManager;
+use Medas\EntityManager\Selector\Conditions\WhereIs;
+use Medas\EntityManager\Selector\Operants\Argument;
+use Medas\EntityManager\Selector\Operants\Property;
 use Medas\EntityManager\Selector\Selector;
 use Medas\JsonStorage\Actions\GetRecord;
+use Medas\JsonStorage\Exceptions\SelectorNotYetImplemented;
 use Medas\StorageManager\Interfaces\Builders\SelectorActionBuilder as SelectorActionBuilderInterface;
 use Medas\StorageManager\StorageManager;
 use Medas\StorageManager\UnitOfWork\ActionSet;
@@ -30,11 +34,29 @@ readonly class SelectorActionBuilder implements SelectorActionBuilderInterface
 
         // TODO actually process the definition
         $definition = $selector->definition();
+        $filters = [];
 
-        if ($definition->parameters || $definition->conditions || $definition->pagination || $definition->relations || $definition->sorts) {
-            throw new \Exception('not yet implemented');
+        foreach ($definition->conditions as $condition) {
+            if ($condition instanceof WhereIs && $condition->property instanceof Property && $condition->value instanceof Argument) {
+                $filters[$condition->property->name] = $arguments[$condition->value->name];
+            }
+            else {
+                throw new SelectorNotYetImplemented($condition);
+            }
         }
 
-        return ActionSet::fromAction(new GetRecord([$store], []));
+        if ($definition->sorts) {
+            throw new SelectorNotYetImplemented($definition->sorts);
+        }
+
+        if ($definition->relations) {
+            throw new SelectorNotYetImplemented($definition->relations);
+        }
+
+        if ($definition->pagination) {
+            throw new SelectorNotYetImplemented($definition->pagination);
+        }
+
+        return ActionSet::fromAction(new GetRecord([$store], $filters));
     }
 }

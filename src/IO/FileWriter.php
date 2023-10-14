@@ -27,11 +27,6 @@ readonly class FileWriter
             throw new FileNotFound($path);
         }
 
-        $content = [
-            'keyName' => $data->keyName,
-            'data' => $data->data(),
-        ];
-
-        file_put_contents($path, $this->json->encode($content));
+        file_put_contents($path, $this->json->encode($data->content()));
     }
 }

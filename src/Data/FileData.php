@@ -8,19 +8,39 @@ use Medas\JsonStorage\StorageFile;
 
 class FileData
 {
+    public readonly string|null $keyName;
+    public readonly array $fieldNames;
+
+    private array $data;
     private bool $hasUnflushedChanges = false;
+    private array $baseRecord;
 
     public function __construct(
         public readonly StorageFile $file,
-        public readonly string|null $keyName,
-        private array                $data,
+        array                       $content,
     )
     {
+        $this->keyName = $content['keyName'];
+        $this->fieldNames = $content['fieldNames'];
+        $this->data = $content['data'];
+
+        $this->baseRecord = array_fill_keys($this->fieldNames, null);
     }
 
-    public function data(): array
+    public function data(): iterable
     {
-        return $this->data;
+        foreach ($this->data as $key => $datum) {
+            yield $this->getDatum($key);
+        }
+    }
+
+    public function content(): array
+    {
+        return [
+            'keyName' => $this->keyName,
+            'fieldNames' => $this->fieldNames,
+            'data' => $this->data,
+        ];
     }
 
     public function dataCount(): int
@@ -38,7 +58,7 @@ class FileData
             return $this->data[$key];
         }
 
-        return [$this->keyName => $key] + $this->data[$key];
+        return array_merge($this->baseRecord, [$this->keyName => $key] + $this->data[$key]);
     }
 
     public function setDatum(mixed $key, array $data): void

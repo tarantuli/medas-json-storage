@@ -43,8 +43,15 @@ readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
 
     private function createContent(Blueprint $blueprint): array
     {
+        $fieldNames = [];
+
+        foreach ($blueprint->fields as $field) {
+            $fieldNames[] = $field->name;
+        }
+
         return [
             'keyName' => $blueprint->primaryIndex()?->fields()[0]?->name,
+            'fieldNames' => $fieldNames,
             'data' => [],
         ];
     }

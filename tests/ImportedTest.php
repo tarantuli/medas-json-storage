@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 class ImportedTest extends TestCase
 {
     use InheritanceTest;
-    // use EntityPersisterTest;
+    use EntityPersisterTest;
 
     private Storage $storage;
     private StorageController $controller;

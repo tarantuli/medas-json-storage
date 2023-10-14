@@ -28,7 +28,7 @@ class DataManager
         if (!isset($this->dataObjects[$id])) {
             $content = $this->reader->read($file);
 
-            $this->dataObjects[$id] = new FileData($file, $content['keyName'], $content['data']);
+            $this->dataObjects[$id] = new FileData($file, $content);
         }
 
         return $this->dataObjects[$id];

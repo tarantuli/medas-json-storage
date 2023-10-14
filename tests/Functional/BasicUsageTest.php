@@ -19,7 +19,7 @@ class BasicUsageTest extends ImportedTest
         $migration = $this->createMigrationClassContent('Migrations');
 
         self::assertStringContainsString(
-            '$unitOfWork->addAction(new CreateFileAction("default", "tests/TestStorage\\\\new_stored_entities.json"',
+            '$unitOfWork->addAction(new CreateFile("default", "tests/TestStorage\\\\new_stored_entities.json"',
             $migration
         );
 
