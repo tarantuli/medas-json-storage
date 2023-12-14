@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Actions;
 
 use Medas\Core\Attributes\Service;
-use Medas\StorageManager\Interfaces\ActionExecutor;
-use Medas\StorageManager\UnitOfWork\{Action, ActionSet};
+use Medas\StorageManager\{Interfaces\ActionExecutor, UnitOfWork\Action, UnitOfWork\ActionSet};
 
 #[Service]
 readonly class Executor implements ActionExecutor
@@ -23,7 +22,11 @@ readonly class Executor implements ActionExecutor
     {
         match (true) {
             $action instanceof CreateFile => $this->createFileExecutor->execute($action),
-            $action instanceof InsertRecord => $this->insertRecordExecutor->execute($action, $actionSet?->lastInsertId),
+            $action instanceof InsertRecord => $this->insertRecordExecutor->execute(
+                $action,
+                $actionSet?->lastInsertId
+            ),
+
             $action instanceof GetRecord => $this->getRecordExecutor->execute($action),
             default => throw new \Exception('To be implemented: ' . $action::class),
         };
@@ -33,7 +36,10 @@ readonly class Executor implements ActionExecutor
         }
 
         if ($onComplete = $action->onComplete()) {
-            $insertId = $actionSet ? $actionSet->lastInsertId : ($action instanceof InsertRecord ? $action->insertId : null);
+            $insertId = $actionSet
+                ? $actionSet->lastInsertId
+                : ($action instanceof InsertRecord ? $action->insertId : null);
+
             $onComplete($action->storage(), $insertId);
         }
     }

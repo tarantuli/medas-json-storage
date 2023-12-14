@@ -4,35 +4,32 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage;
 
-use Medas\Core\Attributes\Service;
-use Medas\Core\Interfaces\Serializer as SerializerInterface;
-use Medas\JsonStorage\Builders\MigrationBuilder;
-use Medas\JsonStorage\IO\PathBuilder;
-use Medas\JsonStorage\Transactions\Transaction;
-use Medas\JsonStorage\Transactions\TransactionCollection;
-use Medas\StorageManager\Interfaces\{ActionBuilders,
-    ActionExecutor,
-    RecordFetchers as RecordFetchersInterface,
-    Storage,
-    StorageController as StorageControllerInterface,
-    Store,
-    Transaction as TransactionInterface};
-use Medas\StorageManager\Migrations\MigrationBuilder as MigrationBuilderInterface;
+use Medas\Core\{Attributes\Service, Interfaces\Serializer as SerializerInterface};
+use Medas\StorageManager\{
+    Interfaces\ActionBuilders,
+    Interfaces\ActionExecutor,
+    Interfaces\RecordFetchers as RecordFetchersInterface,
+    Interfaces\Storage,
+    Interfaces\StorageController as StorageControllerInterface,
+    Interfaces\Store,
+    Interfaces\Transaction as TransactionInterface,
+    Migrations\MigrationBuilder as MigrationBuilderInterface
+};
 
 #[Service]
 class StorageController implements StorageControllerInterface
 {
     private StorageDirectory $defaultStorage;
     private readonly FileCollection $fileCollection;
-    private readonly TransactionCollection $transactionCollection;
+    private readonly Transactions\TransactionCollection $transactionCollection;
 
     public function __construct(
-        private readonly Serializer  $serializer,
-        private readonly PathBuilder $pathBuilder,
+        private readonly Serializer     $serializer,
+        private readonly IO\PathBuilder $pathBuilder,
     )
     {
         $this->fileCollection = new FileCollection();
-        $this->transactionCollection = new TransactionCollection();
+        $this->transactionCollection = new Transactions\TransactionCollection();
     }
 
     public function handles(Storage $storage): bool
@@ -57,7 +54,6 @@ class StorageController implements StorageControllerInterface
     public function deleteStore(Store $store): void
     {
         $storage ??= $this->defaultStorage;
-
         $path = $this->pathBuilder->build($storage, $store->name());
 
         if (file_exists($path)) {
@@ -70,7 +66,7 @@ class StorageController implements StorageControllerInterface
         $id = spl_object_id($storage);
 
         if (!$this->transactionCollection->offsetExists($id)) {
-            $this->transactionCollection->offsetSet($id, new Transaction());
+            $this->transactionCollection->offsetSet($id, new Transactions\Transaction());
         }
 
         return $this->transactionCollection->offsetGet($id);
@@ -104,13 +100,12 @@ class StorageController implements StorageControllerInterface
 
     public function migrationBuilder(): MigrationBuilderInterface
     {
-        return service(MigrationBuilder::class);
+        return service(Builders\MigrationBuilder::class);
     }
 
     public function hasStore(Store $store, Storage $storage = null): bool
     {
         $storage ??= $this->defaultStorage;
-
         $path = $this->pathBuilder->build($storage, $store->name());
 
         return file_exists($path);

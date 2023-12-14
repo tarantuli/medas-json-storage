@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Actions\Executors;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\Actions\InsertRecord;
-use Medas\JsonStorage\Data\DataManager;
+use Medas\JsonStorage\{Actions\InsertRecord, Data\DataManager};
 use Medas\StorageManager\Entities\LastInsertIdPlaceholder;
 
 #[Service]
@@ -36,6 +35,7 @@ readonly class InsertRecordExecutor
         }
 
         $action->insertId = $key;
+
         $content->setDatum($key, $action->data);
     }
 }

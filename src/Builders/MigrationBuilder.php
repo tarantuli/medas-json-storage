@@ -6,13 +6,13 @@ namespace Medas\JsonStorage\Builders;
 
 use Medas\Core\Attributes\Service;
 use Medas\FileBuilder\PhpClass\MethodDefinition;
-use Medas\JsonStorage\Actions\CreateFile;
-use Medas\JsonStorage\IO\PathBuilder;
-use Medas\JsonStorage\Json;
-use Medas\StorageManager\Interfaces\Storage;
-use Medas\StorageManager\Migrations\MigrationBuilder as MigrationBuilderInterface;
-use Medas\StorageManager\Structure\Blueprint;
-use Medas\StorageManager\UnitOfWork\ActionSet;
+use Medas\JsonStorage\{Actions\CreateFile, IO\PathBuilder, Json};
+use Medas\StorageManager\{
+    Interfaces\Storage,
+    Migrations\MigrationBuilder as MigrationBuilderInterface,
+    Structure\Blueprint,
+    UnitOfWork\ActionSet
+};
 
 #[Service]
 readonly class MigrationBuilder implements MigrationBuilderInterface
@@ -25,7 +25,12 @@ readonly class MigrationBuilder implements MigrationBuilderInterface
     {
     }
 
-    public function build(Storage $storage, Blueprint $expectedStructure, MethodDefinition $migrateMethod, MethodDefinition $undoMethod): bool
+    public function build(
+        Storage          $storage,
+        Blueprint        $expectedStructure,
+        MethodDefinition $migrateMethod,
+        MethodDefinition $undoMethod
+    ): bool
     {
         $path = $this->pathBuilder->build($storage, $expectedStructure->name);
 
@@ -34,7 +39,6 @@ readonly class MigrationBuilder implements MigrationBuilderInterface
         }
 
         $actionClass = CreateFile::class;
-
         $actions = $this->buildActions($storage, $expectedStructure);
 
         foreach ($actions as $action) {
@@ -42,7 +46,6 @@ readonly class MigrationBuilder implements MigrationBuilderInterface
             $storageName = addcslashes($storage->name(), '"');
             $path = addcslashes($action->path, '"\\');
             $content = $this->json->encode($action->content);
-
             $migrateMethod->body .= <<<PHP
 \$unitOfWork->addAction(new \\$actionClass(
     "$storageName",

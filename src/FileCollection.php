@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage;
 
-use Medas\StorageManager\Interfaces\Store;
-use Medas\StorageManager\Shared\StoreCollection;
+use Medas\StorageManager\{Interfaces\Store, Shared\StoreCollection};
 
 /**
  * @extends StoreCollection<StorageFile>

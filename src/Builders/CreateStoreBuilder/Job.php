@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Builders\CreateStoreBuilder;
 
 use Medas\JsonStorage\StorageDirectory;
-use Medas\StorageManager\Structure\Blueprint;
-use Medas\StorageManager\UnitOfWork\ActionSet;
+use Medas\StorageManager\{Structure\Blueprint, UnitOfWork\ActionSet};
 
 class Job
 {

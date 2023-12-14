@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Medas\JsonStorage;
 
 use Medas\Core\Collections\GenericCollection;
-use Medas\StorageManager\Entities\Record;
-use Medas\StorageManager\Interfaces\Record as RecordInterface;
-use Medas\StorageManager\Interfaces\RecordSet as RecordSetInterface;
+use Medas\StorageManager\{
+    Entities\Record,
+    Interfaces\Record as RecordInterface,
+    Interfaces\RecordSet as RecordSetInterface
+};
 
 /** @extends GenericCollection<Record> */
 class RecordSet extends GenericCollection implements RecordSetInterface

@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Fetchers;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\Data\DataManager;
-use Medas\JsonStorage\RecordSet;
+use Medas\JsonStorage\{Data\DataManager, RecordSet};
 use Medas\StorageManager\Entities\Record;
-use Medas\StorageManager\Interfaces\Fetchers\FilteredFetcher as FilteredFetcherInterface;
-use Medas\StorageManager\Interfaces\Record as RecordInterface;
-use Medas\StorageManager\Interfaces\RecordSet as RecordSetInterface;
-use Medas\StorageManager\Interfaces\Store;
+use Medas\StorageManager\Interfaces\{
+    Fetchers\FilteredFetcher as FilteredFetcherInterface,
+    Record as RecordInterface,
+    RecordSet as RecordSetInterface,
+    Store
+};
 
 #[Service]
 readonly class FilteredFetcher implements FilteredFetcherInterface
@@ -37,9 +38,11 @@ readonly class FilteredFetcher implements FilteredFetcherInterface
 
         foreach ($fileData->data() as $record) {
             $matches = true;
+
             foreach ($filters as $property => $filter) {
                 if ($record[$property] !== $filter) {
                     $matches = false;
+
                     break;
                 }
             }

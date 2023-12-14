@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Data;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\IO\{FileReader, FileWriter};
-use Medas\JsonStorage\StorageFile;
+use Medas\JsonStorage\{IO\FileReader, IO\FileWriter, StorageFile};
 
 #[Service]
 class DataManager
@@ -27,7 +26,6 @@ class DataManager
 
         if (!isset($this->dataObjects[$id])) {
             $content = $this->reader->read($file);
-
             $this->dataObjects[$id] = new FileData($file, $content);
         }
 
@@ -38,6 +36,7 @@ class DataManager
     {
         foreach ($this->dataObjects as $fileData) {
             $this->writer->write($fileData);
+
             $fileData->hasBeenFlushed();
         }
     }

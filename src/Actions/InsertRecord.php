@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Actions;
 
 use Medas\JsonStorage\StorageFile;
-use Medas\StorageManager\Interfaces\RecordSet;
-use Medas\StorageManager\UnitOfWork\{BaseAction, Priority};
+use Medas\StorageManager\{Interfaces\RecordSet, UnitOfWork\BaseAction, UnitOfWork\Priority};
 
 class InsertRecord extends BaseAction
 {
     public mixed $insertId;
-
     public RecordSet $recordSet;
 
     public function __construct(

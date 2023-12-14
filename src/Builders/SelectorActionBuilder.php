@@ -6,12 +6,13 @@ namespace Medas\JsonStorage\Builders;
 
 use Medas\Core\Attributes\Service;
 use Medas\EntityManager\MetaDataManager;
-use Medas\EntityManager\Selector\Conditions\WhereIs;
-use Medas\EntityManager\Selector\Operants\Argument;
-use Medas\EntityManager\Selector\Operants\Property;
-use Medas\EntityManager\Selector\Selector;
-use Medas\JsonStorage\Actions\GetRecord;
-use Medas\JsonStorage\Exceptions\SelectorNotYetImplemented;
+use Medas\EntityManager\Selector\{
+    Conditions\WhereIs,
+    Operants\Argument,
+    Operants\Property,
+    Selector
+};
+use Medas\JsonStorage\{Actions\GetRecord, Exceptions\SelectorNotYetImplemented};
 use Medas\StorageManager\Interfaces\Builders\SelectorActionBuilder as SelectorActionBuilderInterface;
 use Medas\StorageManager\StorageManager;
 use Medas\StorageManager\UnitOfWork\ActionSet;
@@ -37,7 +38,9 @@ readonly class SelectorActionBuilder implements SelectorActionBuilderInterface
         $filters = [];
 
         foreach ($definition->conditions as $condition) {
-            if ($condition instanceof WhereIs && $condition->property instanceof Property && $condition->value instanceof Argument) {
+            if ($condition instanceof WhereIs
+                    && $condition->property instanceof Property
+                    && $condition->value instanceof Argument) {
                 $filters[$condition->property->name] = $arguments[$condition->value->name];
             }
             else {

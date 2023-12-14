@@ -10,7 +10,6 @@ class FileData
 {
     public readonly string|null $keyName;
     public readonly array $fieldNames;
-
     private array $data;
     private bool $hasUnflushedChanges = false;
     private array $baseRecord;
@@ -23,7 +22,6 @@ class FileData
         $this->keyName = $content['keyName'];
         $this->fieldNames = $content['fieldNames'];
         $this->data = $content['data'];
-
         $this->baseRecord = array_fill_keys($this->fieldNames, null);
     }
 

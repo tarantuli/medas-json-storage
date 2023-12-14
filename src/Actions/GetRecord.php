@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Actions;
 
 use Medas\JsonStorage\StorageFile;
-use Medas\StorageManager\Interfaces\RecordSet;
-use Medas\StorageManager\UnitOfWork\BaseAction;
-use Medas\StorageManager\UnitOfWork\Priority;
+use Medas\StorageManager\{Interfaces\RecordSet, UnitOfWork\BaseAction, UnitOfWork\Priority};
 
 class GetRecord extends BaseAction
 {

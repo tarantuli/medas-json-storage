@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage;
 
-use Medas\Core\Attributes\Service;
-use Medas\Core\Exceptions\GuidProviderIsNotAvailable;
-use Medas\Core\Interfaces\{Guid, GuidProvider, Serializer as SerializerInterface, Type};
+use Medas\Core\{
+    Attributes\Service,
+    Exceptions\GuidProviderIsNotAvailable,
+    Interfaces\Guid,
+    Interfaces\GuidProvider,
+    Interfaces\Serializer as SerializerInterface,
+    Interfaces\Type
+};
 use Medas\EntityManager\Types\Guid as GuidType;
 
 #[Service]

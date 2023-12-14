@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Builders;
 
 use Medas\Core\Attributes\Service;
-use Medas\StorageManager\Interfaces\ActionBuilders as ActionBuildersInterface;
-use Medas\StorageManager\Interfaces\Builders;
+use Medas\StorageManager\Interfaces\{ActionBuilders as ActionBuildersInterface, Builders};
 
 #[Service]
 readonly class ActionBuilders implements ActionBuildersInterface

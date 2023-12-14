@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage\Builders;
 
-use Medas\Core\Attributes\ConfigValue;
-use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\Actions\CreateFile;
-use Medas\JsonStorage\IO\PathBuilder;
-use Medas\JsonStorage\Json;
-use Medas\JsonStorage\StorageDirectory;
+use Medas\Core\Attributes\{ConfigValue, Service};
+use Medas\JsonStorage\{Actions\CreateFile, IO\PathBuilder, Json, StorageDirectory};
 use Medas\StorageManager\ConfigOptions\OriginalClassStorage\DefaultStrategy;
 use Medas\StorageManager\Inheritance\OriginalClassStorageStrategy;
-use Medas\StorageManager\Interfaces\Builders\CreateStoreBuilder as CreateStoreBuilderInterface;
-use Medas\StorageManager\Interfaces\Storage;
+use Medas\StorageManager\Interfaces\{
+    Builders\CreateStoreBuilder as CreateStoreBuilderInterface,
+    Storage
+};
 use Medas\StorageManager\Structure\Blueprint;
 use Medas\StorageManager\UnitOfWork\ActionSet;
 

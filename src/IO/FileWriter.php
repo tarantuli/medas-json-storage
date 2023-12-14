@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\IO;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\Data\FileData;
-use Medas\JsonStorage\Exceptions\FileNotFound;
-use Medas\JsonStorage\Json;
+use Medas\JsonStorage\{Data\FileData, Exceptions\FileNotFound, Json};
 
 #[Service]
 readonly class FileWriter
