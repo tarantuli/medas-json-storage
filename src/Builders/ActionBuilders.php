@@ -37,12 +37,12 @@ readonly class ActionBuilders implements ActionBuildersInterface
 
     public function update(): Builders\UpdateBuilder
     {
-        // TODO: Implement update() method.
+        return service(UpdateBuilder::class);
     }
 
     public function delete(): Builders\DeleteBuilder
     {
-        // TODO: Implement delete() method.
+        return service(DeleteBuilder::class);
     }
 
     public function collectionUpdate(): Builders\CollectionUpdateBuilder

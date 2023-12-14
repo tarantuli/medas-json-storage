@@ -28,7 +28,7 @@ class FileData
     public function data(): iterable
     {
         foreach ($this->data as $key => $datum) {
-            yield $this->getDatum($key);
+            yield $key => $this->getDatum($key);
         }
     }
 
@@ -62,6 +62,13 @@ class FileData
     public function setDatum(mixed $key, array $data): void
     {
         $this->data[$key] = $data;
+        $this->hasUnflushedChanges = true;
+    }
+
+    public function unsetDatum(mixed $key): void
+    {
+        unset($this->data[$key]);
+
         $this->hasUnflushedChanges = true;
     }
 

@@ -10,6 +10,7 @@ use Medas\EntityManager\Selector\{
     Conditions\WhereIs,
     Operants\Argument,
     Operants\Property,
+    Operants\Value,
     Selector
 };
 use Medas\JsonStorage\{Actions\GetRecord, Exceptions\SelectorNotYetImplemented};
@@ -42,6 +43,13 @@ readonly class SelectorActionBuilder implements SelectorActionBuilderInterface
                     && $condition->property instanceof Property
                     && $condition->value instanceof Argument) {
                 $filters[$condition->property->name] = $arguments[$condition->value->name];
+            }
+            elseif (
+                $condition instanceof WhereIs
+                && $condition->property instanceof Property
+                && $condition->value instanceof Value
+            ) {
+                $filters[$condition->property->name] = $condition->value->value;
             }
             else {
                 throw new SelectorNotYetImplemented($condition);

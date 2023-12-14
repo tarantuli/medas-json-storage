@@ -12,22 +12,26 @@ readonly class Executor implements ActionExecutor
 {
     public function __construct(
         private Executors\CreateFileExecutor   $createFileExecutor,
+        private Executors\DeleteRecordExecutor $deleteRecordExecutor,
         private Executors\GetRecordExecutor    $getRecordExecutor,
         private Executors\InsertRecordExecutor $insertRecordExecutor,
+        private Executors\UpdateRecordExecutor $updateRecordExecutor,
     )
     {
     }
 
     public function execute(Action $action, ActionSet $actionSet = null): void
     {
-        match (true) {
-            $action instanceof CreateFile => $this->createFileExecutor->execute($action),
-            $action instanceof InsertRecord => $this->insertRecordExecutor->execute(
+        match ($action::class) {
+            CreateFile::class => $this->createFileExecutor->execute($action),
+            DeleteRecord::class => $this->deleteRecordExecutor->execute($action),
+            GetRecord::class => $this->getRecordExecutor->execute($action),
+            InsertRecord::class => $this->insertRecordExecutor->execute(
                 $action,
                 $actionSet?->lastInsertId
             ),
 
-            $action instanceof GetRecord => $this->getRecordExecutor->execute($action),
+            UpdateRecord::class => $this->updateRecordExecutor->execute($action),
             default => throw new \Exception('To be implemented: ' . $action::class),
         };
 

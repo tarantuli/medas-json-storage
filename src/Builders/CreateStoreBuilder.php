@@ -44,7 +44,9 @@ readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
         $fieldNames = [];
 
         foreach ($blueprint->fields as $field) {
-            $fieldNames[] = $field->name;
+            if ($field->store === $blueprint->name) {
+                $fieldNames[] = $field->name;
+            }
         }
 
         return [
