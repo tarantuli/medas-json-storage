@@ -11,7 +11,7 @@ use Medas\StorageManager\{Interfaces\ActionExecutor, UnitOfWork\Action, UnitOfWo
 readonly class Executor implements ActionExecutor
 {
     public function __construct(
-        private CreateStore\CreateStoreExecutor           $createFileExecutor,
+        private CreateStore\CreateStoreExecutor           $createStoreExecutor,
         private DeleteRecord\DeleteRecordExecutor         $deleteRecordExecutor,
         private GetRecord\GetRecordExecutor               $getRecordExecutor,
         private InsertRecord\InsertRecordExecutor         $insertRecordExecutor,
@@ -24,7 +24,7 @@ readonly class Executor implements ActionExecutor
     public function execute(Action $action, ActionSet $actionSet = null): void
     {
         match ($action::class) {
-            CreateStore\CreateStore::class => $this->createFileExecutor->execute($action),
+            CreateStore\CreateStore::class => $this->createStoreExecutor->execute($action),
             DeleteRecord\DeleteRecord::class => $this->deleteRecordExecutor->execute($action),
             GetRecord\GetRecord::class => $this->getRecordExecutor->execute($action),
             InsertRecord\InsertRecord::class => $this->insertRecordExecutor->execute(

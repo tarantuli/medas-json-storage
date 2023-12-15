@@ -18,7 +18,7 @@ class BasicUsageTest extends ImportedTest
 
         $migration = $this->createMigrationClassContent('Migrations');
 
-        self::assertStringContainsString('$unitOfWork->addAction(new CreateFile(', $migration);
+        self::assertStringContainsString('$unitOfWork->addAction(new CreateStore(', $migration);
         self::assertStringContainsString('"default",', $migration);
 
         self::assertStringContainsString(

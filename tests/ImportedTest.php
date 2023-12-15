@@ -10,7 +10,8 @@ use Medas\StorageManager\{
     Interfaces\Store,
     StorageManager
 };
-use Medas\StorageManagerTests\Functional\{ConsoleCommandsTest,
+use Medas\StorageManagerTests\Functional\{
+    ConsoleCommandsTest,
     DatabaseManagerTest,
     DefaultValuesTest,
     EntityPersisterTest,
@@ -23,7 +24,8 @@ use Medas\StorageManagerTests\Functional\{ConsoleCommandsTest,
     OneToManyRelationTest,
     PropertyHandlerTest,
     TimestampsTest,
-    UnsortedTest};
+    UnsortedTest
+};
 use PHPUnit\Framework\TestCase;
 
 class ImportedTest extends TestCase

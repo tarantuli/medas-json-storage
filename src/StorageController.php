@@ -13,7 +13,8 @@ use Medas\StorageManager\{
     Interfaces\StorageController as StorageControllerInterface,
     Interfaces\Store,
     Interfaces\Transaction as TransactionInterface,
-    Migrations\MigrationBuilder as MigrationBuilderInterface
+    Migrations\MigrationBuilder as MigrationBuilderInterface,
+    Shared\ValueSerializer
 };
 
 #[Service]
@@ -25,7 +26,7 @@ class StorageController implements StorageControllerInterface
 
     public function __construct(
         private readonly Data\DataManager $dataManager,
-        private readonly Serializer       $serializer,
+        private readonly ValueSerializer  $serializer,
         private readonly IO\PathBuilder   $pathBuilder,
     )
     {

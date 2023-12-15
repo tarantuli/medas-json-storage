@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8747ef40854ef490aaaf0153612e10c",
+    "content-hash": "6dd4132a1282454946ee99dc3eb0a82d",
     "packages": [
         {
             "name": "morphp/medas-cache",
@@ -360,6 +360,48 @@
             "time": "2023-11-27T13:51:20+00:00"
         },
         {
+            "name": "morphp/medas-json",
+            "version": "dev-dev",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:tarantuli/medas-json.git",
+                "reference": "4b2d6836eaa1c8c792a700c0ae7709f8e2ecc030"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tarantuli/medas-json/zipball/4b2d6836eaa1c8c792a700c0ae7709f8e2ecc030",
+                "reference": "4b2d6836eaa1c8c792a700c0ae7709f8e2ecc030",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "morphp/medas-core": "dev-dev"
+            },
+            "require-dev": {
+                "morphp/medas-service-manager": "dev-dev",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Medas\\Json\\": "src/",
+                    "Medas\\JsonTest\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Morpey",
+                    "email": "patrick@morphp.nl"
+                }
+            ],
+            "description": "Medas JSON",
+            "support": {
+                "source": "https://github.com/tarantuli/medas-json/tree/dev",
+                "issues": "https://github.com/tarantuli/medas-json/issues"
+            },
+            "time": "2023-12-15T15:03:13+00:00"
+        },
+        {
             "name": "morphp/medas-object-instantiator",
             "version": "dev-dev",
             "source": {
@@ -586,12 +628,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:tarantuli/medas-storage-manager.git",
-                "reference": "b6eb8574cbb38e6a17385ded339ba2b2b6be3c77"
+                "reference": "c7edbdae3fa29baf402f80938e0184a447e14504"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager/zipball/b6eb8574cbb38e6a17385ded339ba2b2b6be3c77",
-                "reference": "b6eb8574cbb38e6a17385ded339ba2b2b6be3c77",
+                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager/zipball/c7edbdae3fa29baf402f80938e0184a447e14504",
+                "reference": "c7edbdae3fa29baf402f80938e0184a447e14504",
                 "shasum": ""
             },
             "require": {
@@ -632,7 +674,7 @@
                 "source": "https://github.com/tarantuli/medas-storage-manager/tree/dev",
                 "issues": "https://github.com/tarantuli/medas-storage-manager/issues"
             },
-            "time": "2023-12-15T12:01:03+00:00"
+            "time": "2023-12-15T14:45:40+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -3484,6 +3526,7 @@
         "morphp/medas-core": 20,
         "morphp/medas-entity-manager": 20,
         "morphp/medas-file-builder": 20,
+        "morphp/medas-json": 20,
         "morphp/medas-storage-manager": 20,
         "morphp/medas-config-manager": 20,
         "morphp/medas-events": 20,
