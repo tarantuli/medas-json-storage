@@ -5,6 +5,14 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Builders;
 
 use Medas\Core\Attributes\Service;
+use Medas\JsonStorage\Actions\{
+    CreateStore\CreateStoreBuilder,
+    DeleteRecord\DeleteRecordBuilder,
+    GetRecord\GetRecordBuilder,
+    InsertRecord\InsertRecordBuilder,
+    UpdateCollection\UpdateCollectionBuilder,
+    UpdateRecord\UpdateRecordBuilder
+};
 use Medas\StorageManager\Interfaces\{ActionBuilders as ActionBuildersInterface, Builders};
 
 #[Service]
@@ -27,26 +35,26 @@ readonly class ActionBuilders implements ActionBuildersInterface
 
     public function insert(): Builders\InsertBuilder
     {
-        return service(InsertBuilder::class);
+        return service(InsertRecordBuilder::class);
     }
 
     public function get(): Builders\GetBuilder
     {
-        return service(GetBuilder::class);
+        return service(GetRecordBuilder::class);
     }
 
     public function update(): Builders\UpdateBuilder
     {
-        return service(UpdateBuilder::class);
+        return service(UpdateRecordBuilder::class);
     }
 
     public function delete(): Builders\DeleteBuilder
     {
-        return service(DeleteBuilder::class);
+        return service(DeleteRecordBuilder::class);
     }
 
     public function collectionUpdate(): Builders\CollectionUpdateBuilder
     {
-        // TODO: Implement collectionUpdate() method.
+        return service(UpdateCollectionBuilder::class);
     }
 }

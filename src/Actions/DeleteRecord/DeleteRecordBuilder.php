@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Medas\JsonStorage\Builders;
+namespace Medas\JsonStorage\Actions\DeleteRecord;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\Actions\DeleteRecord;
-use Medas\StorageManager\Interfaces\{Builders\DeleteBuilder as DeleteBuilderInterface, Store};
+use Medas\StorageManager\Interfaces\{Builders\DeleteBuilder, Store};
 use Medas\StorageManager\UnitOfWork\{ActionSet, Priority};
 
 #[Service]
-readonly class DeleteBuilder implements DeleteBuilderInterface
+readonly class DeleteRecordBuilder implements DeleteBuilder
 {
     public function build(Store $store, array $conditions, Priority $priority = Priority::DeleteRecord): ActionSet
     {

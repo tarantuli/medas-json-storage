@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medas\JsonStorage\Builders\CreateStoreBuilder;
+namespace Medas\JsonStorage\Actions\CreateStore;
 
 use Medas\JsonStorage\StorageDirectory;
 use Medas\StorageManager\{Structure\Blueprint, UnitOfWork\ActionSet};

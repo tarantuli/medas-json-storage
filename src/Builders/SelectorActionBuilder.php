@@ -13,7 +13,8 @@ use Medas\EntityManager\Selector\{
     Operants\Value,
     Selector
 };
-use Medas\JsonStorage\{Actions\GetRecord, Exceptions\SelectorNotYetImplemented};
+use Medas\JsonStorage\Actions\GetRecord\GetRecord;
+use Medas\JsonStorage\Exceptions\SelectorNotYetImplemented;
 use Medas\StorageManager\Interfaces\Builders\SelectorActionBuilder as SelectorActionBuilderInterface;
 use Medas\StorageManager\StorageManager;
 use Medas\StorageManager\UnitOfWork\ActionSet;

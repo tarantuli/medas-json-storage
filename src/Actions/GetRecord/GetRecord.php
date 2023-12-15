@@ -2,31 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Medas\JsonStorage\Actions;
+namespace Medas\JsonStorage\Actions\GetRecord;
 
 use Medas\JsonStorage\StorageFile;
 use Medas\StorageManager\{Interfaces\RecordSet, UnitOfWork\BaseAction, UnitOfWork\Priority};
 
-class UpdateRecord extends BaseAction
+class GetRecord extends BaseAction
 {
     public RecordSet $recordSet;
 
+    /** @param StorageFile[] $files */
     public function __construct(
-        public StorageFile $file,
-        public array       $updates,
-        public array       $conditions,
-        Priority           $priority = Priority::UpdateRecord,
+        public readonly array $files,
+        public array          $criteria,
+        Priority              $priority = Priority::Default
     )
     {
-        parent::__construct($this->file->storage(), $priority);
+        parent::__construct($this->files[0]->storage(), $priority);
     }
 
     public function __serialize(): array
     {
         return [
-            'file' => $this->file,
-            'updates' => $this->updates,
-            'conditions' => $this->conditions,
+            'files' => $this->files,
+            'criteria' => $this->criteria,
             'priority' => $this->priority,
         ];
     }

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Medas\JsonStorage\Actions\Executors;
+namespace Medas\JsonStorage\Actions\GetRecord;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\{Actions\GetRecord, Fetchers\FilteredFetcher};
+use Medas\JsonStorage\Fetchers\FilteredFetcher;
 
 #[Service]
 readonly class GetRecordExecutor

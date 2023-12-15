@@ -12,7 +12,7 @@ class FileData
     public readonly array $fieldNames;
     private array $data;
     private bool $hasUnflushedChanges = false;
-    private array $baseRecord;
+    private array $defaults;
 
     public function __construct(
         public readonly StorageFile $file,
@@ -22,7 +22,7 @@ class FileData
         $this->keyName = $content['keyName'];
         $this->fieldNames = $content['fieldNames'];
         $this->data = $content['data'];
-        $this->baseRecord = array_fill_keys($this->fieldNames, null);
+        $this->defaults = $content['defaults'];
     }
 
     public function data(): iterable
@@ -37,6 +37,7 @@ class FileData
         return [
             'keyName' => $this->keyName,
             'fieldNames' => $this->fieldNames,
+            'defaults' => $this->defaults,
             'data' => $this->data,
         ];
     }
@@ -56,7 +57,7 @@ class FileData
             return $this->data[$key];
         }
 
-        return array_merge($this->baseRecord, [$this->keyName => $key] + $this->data[$key]);
+        return array_merge($this->defaults, [$this->keyName => $key] + $this->data[$key]);
     }
 
     public function setDatum(mixed $key, array $data): void

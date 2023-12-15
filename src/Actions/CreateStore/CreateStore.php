@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Medas\JsonStorage\Actions;
+namespace Medas\JsonStorage\Actions\CreateStore;
 
 use Medas\StorageManager\{StorageManager, UnitOfWork\BaseAction, UnitOfWork\Priority};
 
-class CreateFile extends BaseAction
+class CreateStore extends BaseAction
 {
     public function __construct(
         public readonly string $storageName,

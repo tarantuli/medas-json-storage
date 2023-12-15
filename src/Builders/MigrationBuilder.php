@@ -6,7 +6,9 @@ namespace Medas\JsonStorage\Builders;
 
 use Medas\Core\Attributes\Service;
 use Medas\FileBuilder\PhpClass\MethodDefinition;
-use Medas\JsonStorage\{Actions\CreateFile, IO\PathBuilder, Json};
+use Medas\JsonStorage\Actions\CreateStore\{CreateStore, CreateStoreBuilder};
+use Medas\JsonStorage\IO\PathBuilder;
+use Medas\JsonStorage\Json;
 use Medas\StorageManager\{
     Interfaces\Storage,
     Migrations\MigrationBuilder as MigrationBuilderInterface,
@@ -38,11 +40,11 @@ readonly class MigrationBuilder implements MigrationBuilderInterface
             return false;
         }
 
-        $actionClass = CreateFile::class;
+        $actionClass = CreateStore::class;
         $actions = $this->buildActions($storage, $expectedStructure);
 
         foreach ($actions as $action) {
-            /** @var CreateFile $action */
+            /** @var CreateStore $action */
             $storageName = addcslashes($storage->name(), '"');
             $path = addcslashes($action->path, '"\\');
             $content = $this->json->encode($action->content);

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Medas\JsonStorage\Actions\Executors;
+namespace Medas\JsonStorage\Actions\InsertRecord;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\{Actions\InsertRecord, Data\DataManager};
+use Medas\JsonStorage\Data\DataManager;
 use Medas\StorageManager\Entities\LastInsertIdPlaceholder;
 
 #[Service]
@@ -17,7 +17,7 @@ readonly class InsertRecordExecutor
     {
     }
 
-    public function execute(InsertRecord $action, int|null $lastInsertId): void
+    public function execute(InsertRecord $action, mixed $lastInsertId): void
     {
         $content = $this->dataManager->get($action->file);
 

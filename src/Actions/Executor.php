@@ -11,11 +11,12 @@ use Medas\StorageManager\{Interfaces\ActionExecutor, UnitOfWork\Action, UnitOfWo
 readonly class Executor implements ActionExecutor
 {
     public function __construct(
-        private Executors\CreateFileExecutor   $createFileExecutor,
-        private Executors\DeleteRecordExecutor $deleteRecordExecutor,
-        private Executors\GetRecordExecutor    $getRecordExecutor,
-        private Executors\InsertRecordExecutor $insertRecordExecutor,
-        private Executors\UpdateRecordExecutor $updateRecordExecutor,
+        private CreateStore\CreateStoreExecutor           $createFileExecutor,
+        private DeleteRecord\DeleteRecordExecutor         $deleteRecordExecutor,
+        private GetRecord\GetRecordExecutor               $getRecordExecutor,
+        private InsertRecord\InsertRecordExecutor         $insertRecordExecutor,
+        private UpdateCollection\UpdateCollectionExecutor $updateCollectionExecutor,
+        private UpdateRecord\UpdateRecordExecutor         $updateRecordExecutor,
     )
     {
     }
@@ -23,15 +24,16 @@ readonly class Executor implements ActionExecutor
     public function execute(Action $action, ActionSet $actionSet = null): void
     {
         match ($action::class) {
-            CreateFile::class => $this->createFileExecutor->execute($action),
-            DeleteRecord::class => $this->deleteRecordExecutor->execute($action),
-            GetRecord::class => $this->getRecordExecutor->execute($action),
-            InsertRecord::class => $this->insertRecordExecutor->execute(
+            CreateStore\CreateStore::class => $this->createFileExecutor->execute($action),
+            DeleteRecord\DeleteRecord::class => $this->deleteRecordExecutor->execute($action),
+            GetRecord\GetRecord::class => $this->getRecordExecutor->execute($action),
+            InsertRecord\InsertRecord::class => $this->insertRecordExecutor->execute(
                 $action,
                 $actionSet?->lastInsertId
             ),
 
-            UpdateRecord::class => $this->updateRecordExecutor->execute($action),
+            UpdateCollection\UpdateCollection::class => $this->updateCollectionExecutor->execute($action),
+            UpdateRecord\UpdateRecord::class => $this->updateRecordExecutor->execute($action),
             default => throw new \Exception('To be implemented: ' . $action::class),
         };
 
@@ -42,7 +44,7 @@ readonly class Executor implements ActionExecutor
         if ($onComplete = $action->onComplete()) {
             $insertId = $actionSet
                 ? $actionSet->lastInsertId
-                : ($action instanceof InsertRecord ? $action->insertId : null);
+                : ($action instanceof InsertRecord\InsertRecord ? $action->insertId : null);
 
             $onComplete($action->storage(), $insertId);
         }
@@ -57,11 +59,11 @@ readonly class Executor implements ActionExecutor
 
     private function updateActionSet(Action $action, ActionSet $actionSet): void
     {
-        if ($action instanceof InsertRecord && $action->insertId) {
+        if ($action instanceof InsertRecord\InsertRecord && $action->insertId) {
             $actionSet->lastInsertId = $action->insertId;
         }
 
-        if ($action instanceof GetRecord) {
+        if ($action instanceof GetRecord\GetRecord) {
             $actionSet->lastRecordSet = $action->recordSet;
         }
     }

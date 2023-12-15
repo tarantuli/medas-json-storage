@@ -10,13 +10,32 @@ use Medas\StorageManager\{
     Interfaces\Store,
     StorageManager
 };
-use Medas\StorageManagerTests\Functional\{EntityPersisterTest, InheritanceTest};
+use Medas\StorageManagerTests\Functional\{
+    ConsoleCommandsTest,
+    DatabaseManagerTest,
+    DefaultValuesTest,
+    EntityPersisterTest,
+    EnumTest,
+    GuidTest,
+    HandledPropertyTest,
+    HydratorTest,
+    InheritanceTest,
+    ManyToManyRelationTest
+};
 use PHPUnit\Framework\TestCase;
 
 class ImportedTest extends TestCase
 {
     use InheritanceTest;
     use EntityPersisterTest;
+    use GuidTest;
+    use DefaultValuesTest;
+    use ConsoleCommandsTest;
+    use DatabaseManagerTest;
+    use EnumTest;
+    use HandledPropertyTest;
+    use HydratorTest;
+    use ManyToManyRelationTest;
 
     private Storage $storage;
     private StorageController $controller;
@@ -42,5 +61,10 @@ class ImportedTest extends TestCase
         }
 
         return $this->controller;
+    }
+
+    protected function checkBackedEnumMigration(string $migration): void
+    {
+        // Do nothing
     }
 }

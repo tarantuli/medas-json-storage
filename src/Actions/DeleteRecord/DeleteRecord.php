@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Medas\JsonStorage\Actions;
+namespace Medas\JsonStorage\Actions\DeleteRecord;
 
 use Medas\JsonStorage\StorageFile;
 use Medas\StorageManager\{Interfaces\RecordSet, UnitOfWork\BaseAction, UnitOfWork\Priority};
 
-class InsertRecord extends BaseAction
+class DeleteRecord extends BaseAction
 {
-    public mixed $insertId;
     public RecordSet $recordSet;
 
     public function __construct(
-        public mixed                $data,
-        public readonly StorageFile $file,
-        Priority                    $priority = Priority::Default
+        public StorageFile $file,
+        public array       $conditions,
+        Priority           $priority = Priority::DeleteRecord,
     )
     {
         parent::__construct($this->file->storage(), $priority);
@@ -25,7 +24,7 @@ class InsertRecord extends BaseAction
     {
         return [
             'file' => $this->file,
-            'data' => $this->data,
+            'conditions' => $this->conditions,
             'priority' => $this->priority,
         ];
     }

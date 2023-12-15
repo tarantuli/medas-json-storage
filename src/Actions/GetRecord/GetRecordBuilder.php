@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Medas\JsonStorage\Builders;
+namespace Medas\JsonStorage\Actions\GetRecord;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\Actions\GetRecord;
-use Medas\StorageManager\Interfaces\Builders\GetBuilder as GetBuilderInterface;
+use Medas\StorageManager\Interfaces\Builders\GetBuilder;
 use Medas\StorageManager\UnitOfWork\ActionSet;
 
 #[Service]
-readonly class GetBuilder implements GetBuilderInterface
+readonly class GetRecordBuilder implements GetBuilder
 {
     public function build(array $stores, array $filters): ActionSet
     {
