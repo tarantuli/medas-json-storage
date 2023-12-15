@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Medas\JsonStorage;
 
 use Medas\Core\Attributes\Service;
-use Medas\StorageManager\Interfaces\{Fetchers, RecordFetchers as RecordFetchersInterface};
+use Medas\StorageManager\Interfaces\RecordFetchers as RecordFetchersInterface;
 
 #[Service]
 readonly class RecordFetchers implements RecordFetchersInterface
 {
     public function __construct(
-        private Fetchers\FilteredFetcher $filteredFetcher,
+        private Fetchers\CollectionRecordFetcher $collectionRecordFetcher,
+        private Fetchers\FilteredFetcher         $filteredFetcher,
     )
     {
     }
@@ -23,6 +24,6 @@ readonly class RecordFetchers implements RecordFetchersInterface
 
     public function collectionRecordFetcher(): Fetchers\CollectionRecordFetcher
     {
-        // TODO: Implement collectionRecordFetcher() method.
+        return $this->collectionRecordFetcher;
     }
 }

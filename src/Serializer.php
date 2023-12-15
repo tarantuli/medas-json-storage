@@ -12,7 +12,7 @@ use Medas\Core\{
     Interfaces\Serializer as SerializerInterface,
     Interfaces\Type
 };
-use Medas\EntityManager\Types\Guid as GuidType;
+use Medas\EntityManager\Types\{Boolean, Guid as GuidType, Relation};
 
 #[Service]
 readonly class Serializer implements SerializerInterface
@@ -52,6 +52,18 @@ readonly class Serializer implements SerializerInterface
             }
 
             $value = $this->guidProvider->fromBytes($value);
+        }
+
+        if ($type instanceof Boolean) {
+            return (bool) $value;
+        }
+
+        if ($type instanceof Relation) {
+            if (enum_exists($type->entity)) {
+                return $value;
+            }
+
+            return em()->get($type->entity, $value);
         }
 
         return $value;
