@@ -20,7 +20,10 @@ use Medas\StorageManagerTests\Functional\{ConsoleCommandsTest,
     HydratorTest,
     InheritanceTest,
     ManyToManyRelationTest,
-    OneToManyRelationTest};
+    OneToManyRelationTest,
+    PropertyHandlerTest,
+    TimestampsTest,
+    UnsortedTest};
 use PHPUnit\Framework\TestCase;
 
 class ImportedTest extends TestCase
@@ -36,6 +39,9 @@ class ImportedTest extends TestCase
     use HydratorTest;
     use ManyToManyRelationTest;
     use OneToManyRelationTest;
+    use PropertyHandlerTest;
+    use TimestampsTest;
+    use UnsortedTest;
 
     private Storage $storage;
     private StorageController $controller;
@@ -64,6 +70,26 @@ class ImportedTest extends TestCase
     }
 
     protected function checkBackedEnumMigration(string $migration): void
+    {
+        // Do nothing
+    }
+
+    protected function checkPropertyHandlerMigration(string $migration): void
+    {
+        // Do nothing
+    }
+
+    protected function preMigrationPreparations(): void
+    {
+        // Do nothing
+    }
+
+    protected function migrationAssertions(string $migration): void
+    {
+        // Do nothing
+    }
+
+    protected function postMigrationAssertions(): void
     {
         // Do nothing
     }
