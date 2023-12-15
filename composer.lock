@@ -586,12 +586,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:tarantuli/medas-storage-manager.git",
-                "reference": "bd46d418b10f90bd01da0d750f76a157dc5df02c"
+                "reference": "b6eb8574cbb38e6a17385ded339ba2b2b6be3c77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager/zipball/bd46d418b10f90bd01da0d750f76a157dc5df02c",
-                "reference": "bd46d418b10f90bd01da0d750f76a157dc5df02c",
+                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager/zipball/b6eb8574cbb38e6a17385ded339ba2b2b6be3c77",
+                "reference": "b6eb8574cbb38e6a17385ded339ba2b2b6be3c77",
                 "shasum": ""
             },
             "require": {
@@ -632,7 +632,7 @@
                 "source": "https://github.com/tarantuli/medas-storage-manager/tree/dev",
                 "issues": "https://github.com/tarantuli/medas-storage-manager/issues"
             },
-            "time": "2023-12-14T10:12:42+00:00"
+            "time": "2023-12-15T12:01:03+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -1048,12 +1048,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:tarantuli/medas-storage-manager-tests.git",
-                "reference": "297a281acdc41eb8784f6e65ecf30b44113c5c35"
+                "reference": "c5977d5ed4ff72d88ba8d58ff76e30b16a622a02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager-tests/zipball/297a281acdc41eb8784f6e65ecf30b44113c5c35",
-                "reference": "297a281acdc41eb8784f6e65ecf30b44113c5c35",
+                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager-tests/zipball/c5977d5ed4ff72d88ba8d58ff76e30b16a622a02",
+                "reference": "c5977d5ed4ff72d88ba8d58ff76e30b16a622a02",
                 "shasum": ""
             },
             "require": {
@@ -1083,7 +1083,7 @@
                 "source": "https://github.com/tarantuli/medas-storage-manager-tests/tree/dev",
                 "issues": "https://github.com/tarantuli/medas-storage-manager-tests/issues"
             },
-            "time": "2023-12-14T13:51:00+00:00"
+            "time": "2023-12-14T13:55:23+00:00"
         },
         {
             "name": "myclabs/deep-copy",

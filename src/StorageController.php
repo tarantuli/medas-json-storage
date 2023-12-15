@@ -24,8 +24,9 @@ class StorageController implements StorageControllerInterface
     private readonly Transactions\TransactionCollection $transactionCollection;
 
     public function __construct(
-        private readonly Serializer     $serializer,
-        private readonly IO\PathBuilder $pathBuilder,
+        private readonly Data\DataManager $dataManager,
+        private readonly Serializer       $serializer,
+        private readonly IO\PathBuilder   $pathBuilder,
     )
     {
         $this->fileCollection = new FileCollection();
@@ -59,6 +60,8 @@ class StorageController implements StorageControllerInterface
         if (file_exists($path)) {
             unlink($path);
         }
+
+        $this->dataManager->delete($store);
     }
 
     public function transaction(Storage $storage = null): TransactionInterface

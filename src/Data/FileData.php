@@ -16,7 +16,7 @@ class FileData
 
     public function __construct(
         public readonly StorageFile $file,
-        array                       $content,
+        iterable                    $content,
     )
     {
         $this->keyName = $content['keyName'];

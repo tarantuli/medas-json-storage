@@ -32,6 +32,15 @@ class DataManager
         return $this->dataObjects[$id];
     }
 
+    public function delete(StorageFile $file): void
+    {
+        $id = spl_object_id($file);
+
+        if (isset($this->dataObjects[$id])) {
+            unset($this->dataObjects[$id]);
+        }
+    }
+
     public function flush(): void
     {
         foreach ($this->dataObjects as $fileData) {

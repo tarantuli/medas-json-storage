@@ -10,8 +10,7 @@ use Medas\StorageManager\{
     Interfaces\Store,
     StorageManager
 };
-use Medas\StorageManagerTests\Functional\{
-    ConsoleCommandsTest,
+use Medas\StorageManagerTests\Functional\{ConsoleCommandsTest,
     DatabaseManagerTest,
     DefaultValuesTest,
     EntityPersisterTest,
@@ -20,8 +19,8 @@ use Medas\StorageManagerTests\Functional\{
     HandledPropertyTest,
     HydratorTest,
     InheritanceTest,
-    ManyToManyRelationTest
-};
+    ManyToManyRelationTest,
+    OneToManyRelationTest};
 use PHPUnit\Framework\TestCase;
 
 class ImportedTest extends TestCase
@@ -36,6 +35,7 @@ class ImportedTest extends TestCase
     use HandledPropertyTest;
     use HydratorTest;
     use ManyToManyRelationTest;
+    use OneToManyRelationTest;
 
     private Storage $storage;
     private StorageController $controller;
