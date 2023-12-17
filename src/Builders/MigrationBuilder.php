@@ -47,7 +47,7 @@ readonly class MigrationBuilder implements MigrationBuilderInterface
             /** @var CreateStore $action */
             $storageName = addcslashes($storage->name(), '"');
             $path = addcslashes($action->path, '"\\');
-            $content = $this->encoder->encode($action->content);
+            $content = $this->encoder->encode($action->content, true);
             $migrateMethod->body .= <<<PHP
 \$unitOfWork->addAction(new \\$actionClass(
     "$storageName",

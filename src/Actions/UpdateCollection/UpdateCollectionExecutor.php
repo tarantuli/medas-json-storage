@@ -32,6 +32,8 @@ readonly class UpdateCollectionExecutor
             unset($data[$action->name][array_search($this->idValue->fromEntity($deletion), $data[$action->name])]);
         }
 
+        $data[$action->name] = array_values($data[$action->name]);
+
         $content->setDatum($key, $data);
     }
 

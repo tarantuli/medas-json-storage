@@ -365,12 +365,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:tarantuli/medas-json.git",
-                "reference": "4b2d6836eaa1c8c792a700c0ae7709f8e2ecc030"
+                "reference": "b0851ec8d25846b0f01f6aaaf768d3d6b82504e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-json/zipball/4b2d6836eaa1c8c792a700c0ae7709f8e2ecc030",
-                "reference": "4b2d6836eaa1c8c792a700c0ae7709f8e2ecc030",
+                "url": "https://api.github.com/repos/tarantuli/medas-json/zipball/b0851ec8d25846b0f01f6aaaf768d3d6b82504e4",
+                "reference": "b0851ec8d25846b0f01f6aaaf768d3d6b82504e4",
                 "shasum": ""
             },
             "require": {
@@ -399,7 +399,7 @@
                 "source": "https://github.com/tarantuli/medas-json/tree/dev",
                 "issues": "https://github.com/tarantuli/medas-json/issues"
             },
-            "time": "2023-12-15T15:03:13+00:00"
+            "time": "2023-12-17T10:58:41+00:00"
         },
         {
             "name": "morphp/medas-object-instantiator",
@@ -490,12 +490,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:tarantuli/medas-php-formatter.git",
-                "reference": "4fdff453288852a0e10bc6c6d726d679ff90f9f5"
+                "reference": "14881a73addeeb9b8da813995d3b6a24244866b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-php-formatter/zipball/4fdff453288852a0e10bc6c6d726d679ff90f9f5",
-                "reference": "4fdff453288852a0e10bc6c6d726d679ff90f9f5",
+                "url": "https://api.github.com/repos/tarantuli/medas-php-formatter/zipball/14881a73addeeb9b8da813995d3b6a24244866b4",
+                "reference": "14881a73addeeb9b8da813995d3b6a24244866b4",
                 "shasum": ""
             },
             "require": {
@@ -530,7 +530,7 @@
                 "source": "https://github.com/tarantuli/medas-php-formatter/tree/dev",
                 "issues": "https://github.com/tarantuli/medas-php-formatter/issues"
             },
-            "time": "2023-12-12T14:14:03+00:00"
+            "time": "2023-12-15T15:08:56+00:00"
         },
         {
             "name": "morphp/medas-php-tokenizer",
@@ -1090,12 +1090,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:tarantuli/medas-storage-manager-tests.git",
-                "reference": "b575ea863a9242bce12329bcc1dad7bfdfc77cb3"
+                "reference": "9fc9217e1c1f0e3f94ea127d8031a071cc88a57f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager-tests/zipball/b575ea863a9242bce12329bcc1dad7bfdfc77cb3",
-                "reference": "b575ea863a9242bce12329bcc1dad7bfdfc77cb3",
+                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager-tests/zipball/9fc9217e1c1f0e3f94ea127d8031a071cc88a57f",
+                "reference": "9fc9217e1c1f0e3f94ea127d8031a071cc88a57f",
                 "shasum": ""
             },
             "require": {
@@ -1125,7 +1125,7 @@
                 "source": "https://github.com/tarantuli/medas-storage-manager-tests/tree/dev",
                 "issues": "https://github.com/tarantuli/medas-storage-manager-tests/issues"
             },
-            "time": "2023-12-15T12:16:58+00:00"
+            "time": "2023-12-15T15:11:46+00:00"
         },
         {
             "name": "myclabs/deep-copy",

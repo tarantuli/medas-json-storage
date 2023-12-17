@@ -70,7 +70,7 @@ readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
         $job->actionSet[] = new CreateStore(
             $job->directory->name(),
             $path,
-            $this->encoder->encode($this->createContent($job->blueprint))
+            $this->encoder->encode($this->createContent($job->blueprint), true)
         );
     }
 

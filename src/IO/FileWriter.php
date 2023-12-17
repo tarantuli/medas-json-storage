@@ -26,6 +26,6 @@ readonly class FileWriter
             throw new FileNotFound($path);
         }
 
-        file_put_contents($path, $this->encoder->encode($data->content()));
+        file_put_contents($path, $this->encoder->encode($data->content(), true));
     }
 }
