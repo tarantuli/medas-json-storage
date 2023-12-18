@@ -6,7 +6,6 @@ namespace Medas\JsonStorage;
 
 use Medas\Core\AsSingleton;
 use Medas\Json\JsonPackage;
-use Medas\ObjectToArraySerializer\ObjectToArraySerializerPackage;
 use Medas\ServiceManager\{BasePackage, ServiceConfig};
 use Medas\StorageManager\{StorageManager, StorageManagerPackage};
 
@@ -19,7 +18,6 @@ class JsonStoragePackage extends BasePackage
         return [
             JsonPackage::instance(),
             StorageManagerPackage::instance(),
-            ObjectToArraySerializerPackage::instance(),
         ];
     }
 
