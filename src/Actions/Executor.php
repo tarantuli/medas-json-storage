@@ -50,13 +50,6 @@ readonly class Executor implements ActionExecutor
         }
     }
 
-    public function executeSet(ActionSet $actionSet): void
-    {
-        foreach ($actionSet as $action) {
-            $this->execute($action, $actionSet);
-        }
-    }
-
     private function updateActionSet(Action $action, ActionSet $actionSet): void
     {
         if ($action instanceof InsertRecord\InsertRecord && $action->insertId) {
@@ -65,6 +58,13 @@ readonly class Executor implements ActionExecutor
 
         if ($action instanceof GetRecord\GetRecord) {
             $actionSet->lastRecordSet = $action->recordSet;
+        }
+    }
+
+    public function executeSet(ActionSet $actionSet): void
+    {
+        foreach ($actionSet as $action) {
+            $this->execute($action, $actionSet);
         }
     }
 }

@@ -40,6 +40,17 @@ readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
         return $job->actionSet;
     }
 
+    private function addBasicStore(Job $job): void
+    {
+        $path = $this->pathBuilder->build($job->directory, $job->blueprint->name);
+
+        $job->actionSet[] = new CreateStore(
+            $job->directory->name(),
+            $path,
+            $this->encoder->encode($this->createContent($job->blueprint), true)
+        );
+    }
+
     private function createContent(Blueprint $blueprint): array
     {
         $fieldNames = [];
@@ -61,17 +72,6 @@ readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
             'defaults' => $defaults,
             'data' => [],
         ];
-    }
-
-    private function addBasicStore(Job $job): void
-    {
-        $path = $this->pathBuilder->build($job->directory, $job->blueprint->name);
-
-        $job->actionSet[] = new CreateStore(
-            $job->directory->name(),
-            $path,
-            $this->encoder->encode($this->createContent($job->blueprint), true)
-        );
     }
 
     private function handleOriginalEntityType(Job $job): void
