@@ -1,6 +1,9 @@
 {
     "name": "morphp/medas-json-storage",
     "description": "Medas json storage",
+    "keywords": [
+        "storage"
+    ],
     "authors": [
         {
             "name": "Patrick Morpey",
