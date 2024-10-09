@@ -8,6 +8,7 @@ use Medas\Core\Collections\GenericCollection;
 use Medas\StorageManager\{
     Entities\Record,
     Interfaces\Record as RecordInterface,
+    Interfaces\RecordMetaData,
     Interfaces\RecordSet as RecordSetInterface
 };
 
@@ -27,5 +28,10 @@ class RecordSet extends GenericCollection implements RecordSetInterface
     public function hasRecords(): bool
     {
         return $this->count() >= 1;
+    }
+
+    public function fetchMetaData(): RecordMetaData
+    {
+        // TODO: Implement fetchMetaData() method.
     }
 }

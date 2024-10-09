@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\IO;
 
 use Medas\Core\Attributes\Service;
-use Medas\Json\JsonEncoder;
+use Medas\Json\{JsonEncoder, Settings};
 use Medas\JsonStorage\{Data\FileData, Exceptions\FileNotFound};
 
 #[Service]
@@ -26,6 +26,6 @@ readonly class FileWriter
             throw new FileNotFound($path);
         }
 
-        file_put_contents($path, $this->encoder->encode($data->content(), true));
+        file_put_contents($path, $this->encoder->encode($data->content(), new Settings(true)));
     }
 }

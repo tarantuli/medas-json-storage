@@ -53,6 +53,13 @@ class StorageController implements StorageControllerInterface
         return $this->fileCollection->get($storage ?? $this->defaultStorage, $name);
     }
 
+    public function getStores(Storage $storage = null, string $nameFilter = null): array
+    {
+        // $storage ??= $this->defaultStorage;
+        // TODO: Implement getStores() method.
+        return [];
+    }
+
     public function deleteStore(Store $store): void
     {
         $storage ??= $this->defaultStorage;
@@ -80,6 +87,7 @@ class StorageController implements StorageControllerInterface
     {
         // $storage ??= $this->defaultStorage;
         // TODO: Implement lastGeneratedValue() method.
+        return null;
     }
 
     public function serializer(Storage $storage = null): SerializerInterface

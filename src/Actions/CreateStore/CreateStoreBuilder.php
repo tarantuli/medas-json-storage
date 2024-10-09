@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Actions\CreateStore;
 
 use Medas\Core\Attributes\{ConfigValue, Service};
-use Medas\Json\JsonEncoder;
+use Medas\Json\{JsonEncoder, Settings};
 use Medas\JsonStorage\{IO\PathBuilder, StorageDirectory};
 use Medas\StorageManager\ConfigOptions\OriginalClassStorage\DefaultStrategy;
 use Medas\StorageManager\Inheritance\OriginalClassStorageStrategy;
@@ -47,7 +47,7 @@ readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
         $job->actionSet[] = new CreateStore(
             $job->directory->name(),
             $path,
-            $this->encoder->encode($this->createContent($job->blueprint), true)
+            $this->encoder->encode($this->createContent($job->blueprint), new Settings(true))
         );
     }
 
