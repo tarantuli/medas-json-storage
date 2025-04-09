@@ -31,12 +31,13 @@ readonly class MigrationBuilder implements MigrationBuilderInterface
         Storage          $storage,
         Blueprint        $expectedStructure,
         MethodDefinition $migrateMethod,
-        MethodDefinition $undoMethod
+        MethodDefinition $undoMethod,
+        bool             $ignoreExistingStructure = false,
     ): bool
     {
         $path = $this->pathBuilder->build($storage, $expectedStructure->name);
 
-        if (file_exists($path)) {
+        if (!$ignoreExistingStructure && file_exists($path)) {
             return false;
         }
 
@@ -60,7 +61,11 @@ PHP;
         return true;
     }
 
-    public function buildActions(Storage $storage, Blueprint $blueprint): ActionSet
+    public function buildActions(
+        Storage   $storage,
+        Blueprint $blueprint,
+        bool      $ignoreExistingStructure = false,
+    ): ActionSet
     {
         return $this->createStoreBuilder->build($storage, $blueprint);
     }
