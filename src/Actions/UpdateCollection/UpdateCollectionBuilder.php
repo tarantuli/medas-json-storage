@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage\Actions\UpdateCollection;
 
-use Medas\Core\{Attributes\Service, Interfaces\ManagedCollection};
-use Medas\EntityManager\Types\Collection;
+use Medas\Core\{Attributes\Service, Interfaces\ManagedCollection, Types\Collection};
 use Medas\StorageManager\Interfaces\{Builders\CollectionUpdateBuilder, Store};
 use Medas\StorageManager\UnitOfWork\ActionSet;
 
