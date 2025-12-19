@@ -20,9 +20,9 @@ use Medas\StorageManager\{
 readonly class MigrationBuilder implements MigrationBuilderInterface
 {
     public function __construct(
-        private PathBuilder        $pathBuilder,
-        private JsonEncoder        $encoder,
         private CreateStoreBuilder $createStoreBuilder,
+        private JsonEncoder        $encoder,
+        private PathBuilder        $pathBuilder,
     )
     {
     }

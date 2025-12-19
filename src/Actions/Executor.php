@@ -21,7 +21,7 @@ readonly class Executor implements ActionExecutor
     {
     }
 
-    public function execute(Action $action, ActionSet $actionSet = null): void
+    public function execute(Action $action, ActionSet|null $actionSet = null): void
     {
         match ($action::class) {
             CreateStore\CreateStore::class => $this->createStoreExecutor->execute($action),

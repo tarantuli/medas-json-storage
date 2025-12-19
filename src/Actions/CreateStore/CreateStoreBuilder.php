@@ -21,10 +21,10 @@ readonly class CreateStoreBuilder implements CreateStoreBuilderInterface
 {
     public function __construct(
         private JsonEncoder                  $encoder,
-        private PathBuilder                  $pathBuilder,
 
         #[ConfigValue(DefaultStrategy::class)]
         private OriginalClassStorageStrategy $originalClassStorageStrategy,
+        private PathBuilder                  $pathBuilder,
     )
     {
     }

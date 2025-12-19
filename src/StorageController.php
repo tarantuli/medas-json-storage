@@ -26,8 +26,8 @@ class StorageController implements StorageControllerInterface
 
     public function __construct(
         private readonly Data\DataManager $dataManager,
-        private readonly ValueSerializer  $serializer,
         private readonly IO\PathBuilder   $pathBuilder,
+        private readonly ValueSerializer  $serializer,
     )
     {
         $this->fileCollection = new FileCollection();
@@ -48,12 +48,12 @@ class StorageController implements StorageControllerInterface
         return false;
     }
 
-    public function store(string $name, Storage $storage = null): Store
+    public function store(string $name, Storage|null $storage = null): Store
     {
         return $this->fileCollection->get($storage ?? $this->defaultStorage, $name);
     }
 
-    public function getStores(Storage $storage = null, string $nameFilter = null): array
+    public function getStores(Storage|null $storage = null, string|null $nameFilter = null): array
     {
         // $storage ??= $this->defaultStorage;
         // TODO: Implement getStores() method.
@@ -72,7 +72,7 @@ class StorageController implements StorageControllerInterface
         $this->dataManager->delete($store);
     }
 
-    public function transaction(Storage $storage = null): TransactionInterface
+    public function transaction(Storage|null $storage = null): TransactionInterface
     {
         $id = spl_object_id($storage);
 
@@ -83,14 +83,14 @@ class StorageController implements StorageControllerInterface
         return $this->transactionCollection->offsetGet($id);
     }
 
-    public function lastGeneratedValue(Storage $storage = null): int|null
+    public function lastGeneratedValue(Storage|null $storage = null): int|null
     {
         // $storage ??= $this->defaultStorage;
         // TODO: Implement lastGeneratedValue() method.
         return null;
     }
 
-    public function serializer(Storage $storage = null): SerializerInterface
+    public function serializer(Storage|null $storage = null): SerializerInterface
     {
         return $this->serializer;
     }
@@ -115,7 +115,7 @@ class StorageController implements StorageControllerInterface
         return service(Builders\MigrationBuilder::class);
     }
 
-    public function hasStore(Store $store, Storage $storage = null): bool
+    public function hasStore(Store $store, Storage|null $storage = null): bool
     {
         $storage ??= $this->defaultStorage;
         $path = $this->pathBuilder->build($storage, $store->name());
