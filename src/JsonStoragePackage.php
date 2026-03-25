@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage;
 
-use Medas\Core\{AsSingleton, Interfaces\ServiceConfig};
+use Medas\Core\{AsSingleton, BasePackage, Interfaces\ServiceConfig};
 use Medas\Json\JsonPackage;
-use Medas\ServiceManager\BasePackage;
 use Medas\StorageManager\{StorageManager, StorageManagerPackage};
 
 class JsonStoragePackage extends BasePackage

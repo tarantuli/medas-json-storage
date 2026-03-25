@@ -7,6 +7,8 @@ use Medas\ConfigManager\ConfigManagerPackage;
 use Medas\Events\EventsPackage;
 use Medas\JsonStorage\JsonStoragePackage;
 use Medas\JsonStorage\StorageDirectory;
+use Medas\ObjectInstantiator\ObjectInstantiator;
+use Medas\ObjectInstantiator\ObjectInstantiatorPackage;
 use Medas\ObjectToArraySerializer\ObjectToArraySerializerPackage;
 use Medas\RamseyUuidBridge\RamseyUuidBridgePackage;
 use Medas\ServiceManager\{ServiceConfig, ServiceManager};
@@ -18,12 +20,13 @@ chdir(__DIR__);
 require 'vendor/autoload.php';
 
 new ServiceManager(function (): ServiceConfig {
-    $config = new ServiceConfig();
+    $config = new ServiceConfig(ObjectInstantiator::class);
 
     $config->addPackages([
         ConfigManagerPackage::instance(),
         EventsPackage::instance(),
         JsonStoragePackage::instance(),
+        ObjectInstantiatorPackage::instance(),
         ObjectToArraySerializerPackage::instance(),
         RamseyUuidBridgePackage::instance(),
         StorageManagerTestsPackage::instance(),
