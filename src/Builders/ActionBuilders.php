@@ -8,6 +8,7 @@ use Medas\Core\Attributes\Service;
 use Medas\JsonStorage\Actions\{
     CreateStore\CreateStoreBuilder,
     DeleteRecord\DeleteRecordBuilder,
+    DeleteStore\DeleteStoreBuilder,
     GetRecord\GetRecordBuilder,
     InsertRecord\InsertRecordBuilder,
     UpdateCollection\UpdateCollectionBuilder,
@@ -25,7 +26,7 @@ readonly class ActionBuilders implements ActionBuildersInterface
 
     public function deleteStore(): Builders\DeleteStoreBuilder
     {
-        // TODO: Implement deleteStore() method.
+        return service(DeleteStoreBuilder::class);
     }
 
     public function selectorAction(): Builders\SelectorActionBuilder

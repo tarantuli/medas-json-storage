@@ -13,6 +13,7 @@ readonly class Executor implements ActionExecutor
     public function __construct(
         private CreateStore\CreateStoreExecutor           $createStoreExecutor,
         private DeleteRecord\DeleteRecordExecutor         $deleteRecordExecutor,
+        private DeleteStore\DeleteStoreExecutor           $deleteStoreExecutor,
         private GetRecord\GetRecordExecutor               $getRecordExecutor,
         private InsertRecord\InsertRecordExecutor         $insertRecordExecutor,
         private UpdateCollection\UpdateCollectionExecutor $updateCollectionExecutor,
@@ -34,6 +35,7 @@ readonly class Executor implements ActionExecutor
 
             UpdateCollection\UpdateCollection::class => $this->updateCollectionExecutor->execute($action),
             UpdateRecord\UpdateRecord::class => $this->updateRecordExecutor->execute($action),
+            DeleteStore\DeleteStore::class => $this->deleteStoreExecutor->execute($action),
             default => throw new \Exception('To be implemented: ' . $action::class),
         };
 
