@@ -6,7 +6,7 @@ namespace Medas\JsonStorage\Fetchers;
 
 use Medas\Core\Attributes\Service;
 use Medas\EntityManager\MetaData\Property;
-use Medas\JsonStorage\Data\{DataManager, FileData};
+use Medas\JsonStorage\{Data\DataManager, Data\FileData, StorageFile};
 use Medas\StorageManager\Interfaces\{
     Fetchers\CollectionRecordFetcher as CollectionRecordFetcherInterface,
     Store
@@ -23,6 +23,7 @@ readonly class CollectionRecordFetcher implements CollectionRecordFetcherInterfa
 
     public function fetch(Store $store, object $entity, Property $property): iterable
     {
+        /** @var StorageFile $store */
         $fileData = $this->dataManager->get($store);
         $key = $this->fetchKey($entity, $fileData);
         $data = $fileData->getDatum($key);

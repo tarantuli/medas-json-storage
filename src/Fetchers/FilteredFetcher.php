@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Fetchers;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\{Data\DataManager, RecordSet};
+use Medas\JsonStorage\{Data\DataManager, RecordSet, StorageFile};
 use Medas\StorageManager\Entities\Record;
 use Medas\StorageManager\Interfaces\{
     Fetchers\FilteredFetcher as FilteredFetcherInterface,
@@ -25,6 +25,7 @@ readonly class FilteredFetcher implements FilteredFetcherInterface
 
     public function fetch(Store $store, array $filters = []): RecordSetInterface
     {
+        /** @var StorageFile $store */
         $fileData = $this->dataManager->get($store);
         $set = new RecordSet();
 

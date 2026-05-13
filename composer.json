@@ -16,7 +16,7 @@
     "morphp/medas-entity-manager": "^3",
     "morphp/medas-file-builder": "^3",
     "morphp/medas-json": "^3",
-    "morphp/medas-storage-manager": "^3"
+    "morphp/medas-storage-manager": "^4"
   },
   "require-dev": {
     "morphp/medas-config-manager": "^3",

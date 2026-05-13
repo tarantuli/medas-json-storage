@@ -13,7 +13,6 @@ use Medas\StorageManager\{
     Interfaces\StorageController as StorageControllerInterface,
     Interfaces\Store,
     Interfaces\Transaction as TransactionInterface,
-    Migrations\MigrationBuilder as MigrationBuilderInterface,
     Shared\ValueSerializer
 };
 
@@ -36,7 +35,6 @@ class StorageController implements StorageControllerInterface
 
     public function handles(Storage $storage): bool
     {
-        /** @noinspection PhpConditionAlreadyCheckedInspection */
         if ($storage instanceof StorageDirectory) {
             if (!isset($this->defaultStorage)) {
                 $this->defaultStorage = $storage;
@@ -62,6 +60,7 @@ class StorageController implements StorageControllerInterface
 
     public function deleteStore(Store $store): void
     {
+        /** @var StorageFile $store */
         $storage ??= $this->defaultStorage;
         $path = $this->pathBuilder->build($storage, $store->name());
 
@@ -108,11 +107,6 @@ class StorageController implements StorageControllerInterface
     public function recordFetchers(): RecordFetchersInterface
     {
         return service(RecordFetchers::class);
-    }
-
-    public function migrationBuilder(): MigrationBuilderInterface
-    {
-        return service(Builders\MigrationBuilder::class);
     }
 
     public function hasStore(Store $store, Storage|null $storage = null): bool

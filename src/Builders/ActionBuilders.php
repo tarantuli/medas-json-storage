@@ -6,9 +6,7 @@ namespace Medas\JsonStorage\Builders;
 
 use Medas\Core\Attributes\Service;
 use Medas\JsonStorage\Actions\{
-    CreateStore\CreateStoreBuilder,
     DeleteRecord\DeleteRecordBuilder,
-    DeleteStore\DeleteStoreBuilder,
     GetRecord\GetRecordBuilder,
     InsertRecord\InsertRecordBuilder,
     UpdateCollection\UpdateCollectionBuilder,
@@ -19,16 +17,6 @@ use Medas\StorageManager\Interfaces\{ActionBuilders as ActionBuildersInterface, 
 #[Service]
 readonly class ActionBuilders implements ActionBuildersInterface
 {
-    public function createStore(): Builders\CreateStoreBuilder
-    {
-        return service(CreateStoreBuilder::class);
-    }
-
-    public function deleteStore(): Builders\DeleteStoreBuilder
-    {
-        return service(DeleteStoreBuilder::class);
-    }
-
     public function selectorAction(): Builders\SelectorActionBuilder
     {
         return service(SelectorActionBuilder::class);
