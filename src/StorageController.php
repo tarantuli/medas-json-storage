@@ -35,15 +35,15 @@ class StorageController implements StorageControllerInterface
 
     public function handles(Storage $storage): bool
     {
-        if ($storage instanceof StorageDirectory) {
-            if (!isset($this->defaultStorage)) {
-                $this->defaultStorage = $storage;
-            }
+        return $storage instanceof StorageDirectory;
+    }
 
-            return true;
+    public function initialize(Storage $storage): void
+    {
+        /** @var StorageDirectory $storage */
+        if (!isset($this->defaultStorage)) {
+            $this->defaultStorage = $storage;
         }
-
-        return false;
     }
 
     public function store(string $name, Storage|null $storage = null): Store

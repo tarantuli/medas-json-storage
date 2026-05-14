@@ -731,16 +731,16 @@
         },
         {
             "name": "morphp/medas-storage-manager",
-            "version": "v4.2.1",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tarantuli/medas-storage-manager.git",
-                "reference": "4458038fd2b50b20803f27569f396f8e7fb0304e"
+                "reference": "b9933780e90be41707edd21a415dd16a17b2b8ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager/zipball/4458038fd2b50b20803f27569f396f8e7fb0304e",
-                "reference": "4458038fd2b50b20803f27569f396f8e7fb0304e",
+                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager/zipball/b9933780e90be41707edd21a415dd16a17b2b8ab",
+                "reference": "b9933780e90be41707edd21a415dd16a17b2b8ab",
                 "shasum": ""
             },
             "require": {
@@ -776,10 +776,10 @@
                 "storage"
             ],
             "support": {
-                "source": "https://github.com/tarantuli/medas-storage-manager/tree/v4.2.1",
+                "source": "https://github.com/tarantuli/medas-storage-manager/tree/v4.3.1",
                 "issues": "https://github.com/tarantuli/medas-storage-manager/issues"
             },
-            "time": "2026-05-12T08:06:21+00:00"
+            "time": "2026-05-14T14:20:34+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -1156,16 +1156,16 @@
         },
         {
             "name": "morphp/medas-storage-manager-tests",
-            "version": "v3.0.13",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tarantuli/medas-storage-manager-tests.git",
-                "reference": "f6c605c2db1a466231760b45831912b13fba1793"
+                "reference": "7d1980c9ef6370b04a55b6b1a03e5b803fd99f37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager-tests/zipball/f6c605c2db1a466231760b45831912b13fba1793",
-                "reference": "f6c605c2db1a466231760b45831912b13fba1793",
+                "url": "https://api.github.com/repos/tarantuli/medas-storage-manager-tests/zipball/7d1980c9ef6370b04a55b6b1a03e5b803fd99f37",
+                "reference": "7d1980c9ef6370b04a55b6b1a03e5b803fd99f37",
                 "shasum": ""
             },
             "require": {
@@ -1200,10 +1200,10 @@
                 "storage"
             ],
             "support": {
-                "source": "https://github.com/tarantuli/medas-storage-manager-tests/tree/v3.0.13",
+                "source": "https://github.com/tarantuli/medas-storage-manager-tests/tree/v3.1.1",
                 "issues": "https://github.com/tarantuli/medas-storage-manager-tests/issues"
             },
-            "time": "2026-05-12T07:45:07+00:00"
+            "time": "2026-05-14T14:21:30+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3378,16 +3378,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v7.4.10",
+            "version": "v7.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "c660d6538545a3e8e65a5621ee3d7a6d352892c7"
+                "reference": "e2eb64a57763815ccae07ac1c7653d6cc1c326fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/c660d6538545a3e8e65a5621ee3d7a6d352892c7",
-                "reference": "c660d6538545a3e8e65a5621ee3d7a6d352892c7",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/e2eb64a57763815ccae07ac1c7653d6cc1c326fd",
+                "reference": "e2eb64a57763815ccae07ac1c7653d6cc1c326fd",
                 "shasum": ""
             },
             "require": {
@@ -3430,7 +3430,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v7.4.10"
+                "source": "https://github.com/symfony/yaml/tree/v7.4.11"
             },
             "funding": [
                 {
@@ -3450,7 +3450,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-05T08:01:55+00:00"
+            "time": "2026-05-13T12:04:42+00:00"
         },
         {
             "name": "theseer/tokenizer",
