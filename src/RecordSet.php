@@ -9,12 +9,21 @@ use Medas\StorageManager\{
     Entities\Record,
     Interfaces\Record as RecordInterface,
     Interfaces\RecordSet as RecordSetInterface,
-    Interfaces\RecordSetMetaData
+    Interfaces\RecordSetMetaData as RecordSetMetaDataInterface
 };
 
 /** @extends GenericCollection<Record> */
 class RecordSet extends GenericCollection implements RecordSetInterface
 {
+    public function __construct(
+        array                        $data = [],
+        private readonly array       $fieldNames = [],
+        private readonly string|null $keyName = null,
+    )
+    {
+        parent::__construct($data);
+    }
+
     public function fetchRecords(): array
     {
         return $this->data;
@@ -30,8 +39,12 @@ class RecordSet extends GenericCollection implements RecordSetInterface
         return $this->count() >= 1;
     }
 
-    public function fetchMetaData(): RecordSetMetaData
+    public function fetchMetaData(): RecordSetMetaDataInterface
     {
-        // TODO: Implement fetchMetaData() method.
+        return new RecordSetMetaData(
+            fieldNames: $this->fieldNames,
+            keyName: $this->keyName,
+            rowCount: $this->count(),
+        );
     }
 }

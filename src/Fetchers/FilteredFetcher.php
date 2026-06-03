@@ -27,7 +27,11 @@ readonly class FilteredFetcher implements FilteredFetcherInterface
     {
         /** @var StorageFile $store */
         $fileData = $this->dataManager->get($store);
-        $set = new RecordSet();
+
+        $set = new RecordSet(
+            fieldNames: $fileData->fieldNames,
+            keyName: $fileData->keyName,
+        );
 
         if ($filters && $fileData->keyName === array_keys($filters)[0]) {
             if ($record = $fileData->getDatum($filters[$fileData->keyName])) {
