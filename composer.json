@@ -12,7 +12,7 @@
   ],
   "type": "library",
   "require": {
-    "morphp/medas-core": "^3",
+    "morphp/medas-core": "^4",
     "morphp/medas-entity-manager": "^3",
     "morphp/medas-json": "^3",
     "morphp/medas-storage-manager": "^4"
@@ -20,10 +20,10 @@
   "require-dev": {
     "morphp/medas-config-manager": "^3",
     "morphp/medas-events": "^3",
-    "morphp/medas-object-instantiator": "^3",
+    "morphp/medas-object-instantiator": "^4",
     "morphp/medas-object-to-array-serializer": "^3",
     "morphp/medas-ramsey-uuid-bridge": "^3",
-    "morphp/medas-service-manager": "^3",
+    "morphp/medas-service-manager": "^4",
     "morphp/medas-storage-manager-tests": "^3",
     "phpunit/phpunit": "^10"
   },
