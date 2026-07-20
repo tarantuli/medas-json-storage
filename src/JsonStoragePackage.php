@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Medas\JsonStorage;
 
-use Medas\Core\{AsSingleton, BasePackage, Interfaces\ServiceConfigBuilder};
+use Medas\Core\{AsSingleton, BasePackage};
 use Medas\Json\JsonPackage;
-use Medas\StorageManager\{StorageManager, StorageManagerPackage};
+use Medas\StorageManager\StorageManagerPackage;
 
 class JsonStoragePackage extends BasePackage
 {
@@ -23,12 +23,5 @@ class JsonStoragePackage extends BasePackage
     public function sourceDirectory(): string
     {
         return __DIR__;
-    }
-
-    public function initialize(ServiceConfigBuilder $config): void
-    {
-        parent::initialize($config);
-
-        service(StorageManager::class)->registerController(service(StorageController::class));
     }
 }
