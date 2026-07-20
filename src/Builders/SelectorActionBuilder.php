@@ -29,13 +29,12 @@ readonly class SelectorActionBuilder implements SelectorActionBuilderInterface
     {
     }
 
-    public function build(Selector $selector, array $arguments): ActionSet
+    public function build(Selector $selector, array $arguments, bool $doCount = false): ActionSet
     {
+        // TODO: implement $doCount
         $metaData = $this->metaDataManager->get($selector->entity());
         $storage = $this->storageManager->byName($metaData->entity->storage);
         $store = $this->storageManager->controller($storage)->store($metaData->entity->store);
-
-        // TODO actually process the definition
         $definition = $selector->definition();
         $filters = [];
 
@@ -65,8 +64,8 @@ readonly class SelectorActionBuilder implements SelectorActionBuilderInterface
             throw new SelectorNotYetImplemented($definition->relations);
         }
 
-        if ($definition->pagination) {
-            throw new SelectorNotYetImplemented($definition->pagination);
+        if ($definition->slice) {
+            throw new SelectorNotYetImplemented($definition->slice);
         }
 
         return ActionSet::fromAction(new GetRecord([$store], $filters));

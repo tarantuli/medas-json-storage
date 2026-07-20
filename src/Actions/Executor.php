@@ -28,12 +28,13 @@ readonly class Executor implements ActionExecutor
             CreateStore\CreateStore::class => $this->createStoreExecutor->execute($action),
             DeleteRecord\DeleteRecord::class => $this->deleteRecordExecutor->execute($action),
             GetRecord\GetRecord::class => $this->getRecordExecutor->execute($action),
-            InsertRecord\InsertRecord::class => $this->insertRecordExecutor->execute(
-                $action,
-                $actionSet?->lastInsertId
-            ),
 
-            UpdateCollection\UpdateCollection::class => $this->updateCollectionExecutor->execute($action),
+            InsertRecord\InsertRecord::class
+                => $this->insertRecordExecutor->execute($action, $actionSet?->lastInsertId),
+
+            UpdateCollection\UpdateCollection::class
+                => $this->updateCollectionExecutor->execute($action),
+
             UpdateRecord\UpdateRecord::class => $this->updateRecordExecutor->execute($action),
             DeleteStore\DeleteStore::class => $this->deleteStoreExecutor->execute($action),
             default => throw new \Exception('To be implemented: ' . $action::class),
