@@ -64,10 +64,6 @@ readonly class SelectorActionBuilder implements SelectorActionBuilderInterface
             throw new SelectorNotYetImplemented($definition->relations);
         }
 
-        if ($definition->slice) {
-            throw new SelectorNotYetImplemented($definition->slice);
-        }
-
-        return ActionSet::fromAction(new GetRecord([$store], $filters));
+        return ActionSet::fromAction(new GetRecord([$store], $filters, slice: $definition->slice));
     }
 }

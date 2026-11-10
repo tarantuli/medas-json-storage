@@ -24,6 +24,15 @@ class RecordSet extends GenericCollection implements RecordSetInterface
         parent::__construct($data);
     }
 
+    public function slice(int $from, int $count): RecordSetInterface
+    {
+        return new static(
+            array_slice($this->data, $from, $count),
+            $this->fieldNames,
+            $this->keyName
+        );
+    }
+
     public function fetchRecords(): array
     {
         return $this->data;

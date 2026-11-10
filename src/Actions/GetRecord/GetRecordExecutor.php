@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Actions\GetRecord;
 
 use Medas\Core\Attributes\Service;
-use Medas\JsonStorage\Fetchers\FilteredFetcher;
+use Medas\JsonStorage\{Fetchers\FilteredFetcher, RecordSet};
 
 #[Service]
 readonly class GetRecordExecutor
@@ -18,6 +18,13 @@ readonly class GetRecordExecutor
 
     public function execute(GetRecord $action): void
     {
-        $action->recordSet = $this->filteredFetcher->fetch($action->files[0], $action->criteria);
+        /** @var RecordSet $recordSet */
+        $recordSet = $this->filteredFetcher->fetch($action->files[0], $action->criteria);
+
+        if ($action->slice !== null) {
+            $recordSet = $recordSet->slice($action->slice->from, $action->slice->count);
+        }
+
+        $action->recordSet = $recordSet;
     }
 }
