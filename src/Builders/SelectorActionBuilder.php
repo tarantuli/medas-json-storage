@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Medas\JsonStorage\Builders;
 
 use Medas\Core\Attributes\Service;
+use Medas\EntityManager\Exceptions\{GroupingsThroughRepository, OutputValuesThroughRepository};
 use Medas\EntityManager\MetaDataManager;
 use Medas\EntityManager\Selector\{
     Conditions\WhereIs,
@@ -37,6 +38,21 @@ readonly class SelectorActionBuilder implements SelectorActionBuilderInterface
         $store = $this->storageManager->controller($storage)->store($metaData->entity->store);
         $definition = $selector->definition();
         $filters = [];
+
+        // The Repository turns every record into an entity, so the storage refuses what does not
+        // select the entity's own records (see Repository::fetch())
+        if ($definition->outputValues) {
+            throw new OutputValuesThroughRepository($selector->entity());
+        }
+
+        if ($definition->groupings) {
+            throw new GroupingsThroughRepository($selector->entity());
+        }
+
+        // Not ignored: StoreRecordManager would look for them in each record
+        if ($definition->derivedValues) {
+            throw new SelectorNotYetImplemented($definition->derivedValues);
+        }
 
         foreach ($definition->conditions as $condition) {
             if ($condition instanceof WhereIs
